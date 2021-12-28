@@ -1,0 +1,49 @@
+# Init\Plan. This trigger will run an Initialization and Terraform plan only. It will Not Apply.
+
+trigger:
+  branches:
+    include: # When to trigger this pipeline
+    - prod
+    # - 'feature_*'
+  paths:
+    include:
+    - modules/*
+    - 'dataserv_PROD/*' # trigger folder\path
+    exclude: # What files\ folders to exclude from triggering this pipelines
+    - README.md
+
+pool:
+  name: ccoe-container-corp
+
+# reference to pipeline templates / DO NOT MODIFY
+resources:
+  repositories:
+  - repository: sharedTemplates
+    type: git
+    name: CCoE/ccoe.platform.pipelines
+    ref: refs/heads/master
+
+# build agent
+variables:
+- group: sub-oa-p-dataserv-01 # modify this to fit the library name in ADO
+
+
+stages:
+- stage: 'Terraform_pipeline_running' 
+  jobs:
+  - job: Terraform_Plan
+    displayName: 'Init & Plan'
+    continueOnError: false
+    
+    steps:
+
+    - template: initplan.yml@sharedTemplates
+      parameters:
+        workingdirectory: $(system.defaultWorkingDirectory)/dataserv_PROD # Change folder to include Configuration files
+        backendServiceArm: $(backendServiceArm)
+        backendAzureRmResourceGroupName: $(backendAzureRmResourceGroupName)
+        backendAzureRmStorageAccountName: $(backendAzureRmStorageAccountName)
+        backendAzureRmContainerName: $(backendAzureRmContainerName)
+        backendAzureRmKey: dataserv.tfstate # Change tfstate file to actual state, complying with the naming convention
+        terraform_version: '0.14.11' # Can be used to alter the Terraform Version used.
+        # commandOptions: '-var-file="../tfvars/dataserv.tfvars"'
