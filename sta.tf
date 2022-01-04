@@ -5,3 +5,10 @@ resource "azurerm_storage_account" "sta001" {
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }
+
+resource "azurerm_storage_container" "sct" {
+  name                  = "hdinsight"
+  storage_account_name  = azurerm_storage_account.sta001.name
+  container_access_type = "private"
+}
+
