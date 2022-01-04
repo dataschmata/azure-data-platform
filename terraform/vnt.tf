@@ -5,7 +5,7 @@ resource "azurerm_virtual_network" "vnt001" {
   location            = "westeu"
   resource_group_name = azurerm_resource_group.rsg001.name
 }
- 
+
 # Create Subnet
 resource "azurerm_subnet" "snt001" {
   name                 = "snt-das-dev-westeu-001"
