@@ -13,3 +13,4 @@ resource "azurerm_subnet" "snt001" {
   virtual_network_name = azurerm_virtual_network.vnt001.name
   address_prefix       = "192.168.0.0/24"
 }
+
