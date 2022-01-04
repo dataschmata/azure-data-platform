@@ -23,13 +23,13 @@ resource "azurerm_hdinsight_kafka_cluster" "hdk001" {
 
   roles {
     head_node {
-      vm_size  = "Standard_A1_V2"
+      vm_size  = "STANDARD_D3_V2"
       username = "acctestusrvm"
       password = "AccTestvdSC4daf986!"
     }
 
     worker_node {
-      vm_size                  = "Standard_A1_V2"
+      vm_size                  = "STANDARD_D3_V2"
       username                 = "acctestusrvm"
       password                 = "AccTestvdSC4daf986!"
       number_of_disks_per_node = 2
@@ -37,7 +37,7 @@ resource "azurerm_hdinsight_kafka_cluster" "hdk001" {
     }
 
     zookeeper_node {
-      vm_size  = "Standard_A1_V2"
+      vm_size  = "STANDARD_D3_V2"
       username = "acctestusrvm"
       password = "AccTestvdSC4daf986!"
     }
