@@ -2,7 +2,7 @@
 resource "azurerm_virtual_network" "vnt001" {
   name                = "vnt-das-dev-westeu-001"
   address_space       = ["192.168.0.0/16"]
-  location            = "westeu"
+  location            = azurerm_resource_group.rsg001.location
   resource_group_name = azurerm_resource_group.rsg001.name
 }
 
