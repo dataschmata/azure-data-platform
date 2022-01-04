@@ -32,8 +32,8 @@ resource "azurerm_hdinsight_kafka_cluster" "hdk001" {
       vm_size                  = "Standard_D1_V2"
       username                 = "acctestusrvm"
       password                 = "AccTestvdSC4daf986!"
-      number_of_disks_per_node = 3
-      target_instance_count    = 3
+      number_of_disks_per_node = 2
+      target_instance_count    = 2
     }
 
     zookeeper_node {
