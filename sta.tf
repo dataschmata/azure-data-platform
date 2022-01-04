@@ -6,7 +6,7 @@ resource "azurerm_storage_account" "sta001" {
   account_replication_type = "LRS"
 }
 
-resource "azurerm_storage_container" "sct" {
+resource "azurerm_storage_container" "stc001" {
   name                  = "hdinsight"
   storage_account_name  = azurerm_storage_account.sta001.name
   container_access_type = "private"
