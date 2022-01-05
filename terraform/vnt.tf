@@ -35,3 +35,8 @@ resource "azurerm_subnet" "snt001" {
   address_prefixes     = ["10.0.1.0/24"]
   service_endpoints    = ["Microsoft.Storage"]
 }
+
+resource "azurerm_subnet_network_security_group_association" "nsga001" {
+  subnet_id                 = azurerm_subnet.snt001.id
+  network_security_group_id = azurerm_network_security_group.nsg001.id
+}
