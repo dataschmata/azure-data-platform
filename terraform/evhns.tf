@@ -4,6 +4,10 @@ resource "azurerm_eventhub_namespace" "evhns001" {
   resource_group_name = azurerm_resource_group.rsg001.name
   sku                 = "Standard"
   capacity            = 1
+  
+  virtual_network_rule = {
+    subnet_id = azurerm_subnet.snt001.id
+  }
 }
 
 resource "azurerm_eventhub" "evh001" {
