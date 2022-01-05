@@ -21,10 +21,9 @@ resource "azurerm_eventhub" "evh001" {
   message_retention   = 1
 }
 
-resource "azurerm_eventhub_authorization_rule" "evhar001" {
+resource "azurerm_eventhub_namespace_authorization_rule" "evhar001" {
   name                = "das"
   namespace_name      = azurerm_eventhub_namespace.evhns001.name
-  eventhub_name       = azurerm_eventhub.evh001.name
   resource_group_name = azurerm_resource_group.rsg001.name
   listen              = true
   send                = true
