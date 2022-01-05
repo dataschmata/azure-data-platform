@@ -6,7 +6,7 @@ resource "azurerm_eventhub_namespace" "evhns001" {
   capacity            = 1
   network_rulesets {
     default_action                 = "Deny"
-    trusted_service_access_enabled = "True"
+    trusted_service_access_enabled = true
     virtual_network_rule {
       subnet_id = azurerm_subnet.snt001.id
     }
