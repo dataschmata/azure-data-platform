@@ -22,8 +22,4 @@ resource "azurerm_storage_container" "stc001" {
 resource "azurerm_storage_data_lake_gen2_filesystem" "stf001" {
   name               = "raw"
   storage_account_id = azurerm_storage_account.sta001.id
-
-#   properties = {
-#     hello = "aGVsbG8="
-#   }
 }
