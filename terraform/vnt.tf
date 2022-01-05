@@ -38,5 +38,5 @@ resource "azurerm_subnet" "snt001" {
 
 resource "azurerm_subnet_network_security_group_association" "nsga001" {
   subnet_id                 = azurerm_subnet.snt001.id
-  network_security_group_id = azurerm_network_security_group.nsgsr001.id
+  network_security_group_id = azurerm_network_security_group.nsg001.id
 }
