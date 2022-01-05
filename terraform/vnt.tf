@@ -12,6 +12,21 @@ resource "azurerm_network_security_group" "nsg001" {
   resource_group_name = azurerm_resource_group.rsg001.name
 }
 
+# rule for github actions runner
+resource "azurerm_network_security_rule" "nsgsr001" {
+  name                        = "nsgsr-das-dev-westeu-001"
+  priority                    = 100
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "*"
+  source_address_prefix       = "${chomp(data.http.myip.body)}"
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.rsg001.name
+  network_security_group_name = azurerm_network_security_group.nsg001.name
+}
+
 # Create Subnet
 resource "azurerm_subnet" "snt001" {
   name                 = "snt-das-dev-westeu-001"
