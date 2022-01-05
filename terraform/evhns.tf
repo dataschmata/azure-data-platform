@@ -6,9 +6,9 @@ resource "azurerm_eventhub_namespace" "evhns001" {
   capacity            = 1
   network_rulesets {
     default_action = "Deny"
-    virtual_network_rule = [
+    virtual_network_rule {
       subnet_id = azurerm_subnet.snt001.id
-    ]
+    }
   }
 }
 
