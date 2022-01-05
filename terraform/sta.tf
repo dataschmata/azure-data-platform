@@ -14,7 +14,7 @@ resource "azurerm_storage_account" "sta001" {
 }
 
 resource "azurerm_role_assignment" "role001" {
-  scope                = data.azurerm_subscription.sub.id
+  scope                = azurerm_storage_account.sta001.id
   role_definition_name = "Storage Blob Data Contributor"
   principal_id         = data.azurerm_client_config.cfg.object_id
 }
