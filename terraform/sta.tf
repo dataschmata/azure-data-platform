@@ -8,7 +8,7 @@ resource "azurerm_storage_account" "sta001" {
   is_hns_enabled           = "true"
   network_rules {
     default_action             = "Deny"
-    ip_rules                   = ["100.0.0.1"]
+    ip_rules                   = [chomp(data.http.myip.body)]
     virtual_network_subnet_ids = [azurerm_subnet.snt001.id]
   }
 }
