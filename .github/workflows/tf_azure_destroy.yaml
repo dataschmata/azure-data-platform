@@ -1,4 +1,4 @@
-name: 'Terraform Destroy'
+name: 'Terraform Azure DESTROY'
  
 on: workflow_dispatch
  
@@ -28,7 +28,7 @@ jobs:
       with:
         tf_actions_version: 0.14.8
         tf_actions_subcommand: 'init'
-        tf_actions_working_dir: "./terraform"
+        tf_actions_working_dir: "./tf_azure"
   
     - name: Terraform Destroy
       if: github.ref == 'refs/heads/main'
@@ -36,4 +36,4 @@ jobs:
       with:
         tf_actions_version: 0.14.8
         tf_actions_subcommand: 'destroy'
-        tf_actions_working_dir: "./terraform"
+        tf_actions_working_dir: "./tf_azure"
