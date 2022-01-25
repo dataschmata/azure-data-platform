@@ -10,6 +10,6 @@ owner         = "Owner Name"
 owneremail    = "owner.email@nomail.tst"
 
 region = {
-    "short"    = "weu1"
-    "location" = "westeurope"
+  "short"    = "weu1"
+  "location" = "westeurope"
   }

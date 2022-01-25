@@ -23,8 +23,8 @@ variable "customer" {
   description = "The main customer (user) of the resource"
   type        = map
   default     = {
-    "name"    = "Customer Name"
-    "email"   = "customer.name@email.tst"
+    "name"  = "Customer Name"
+    "email" = "customer.name@email.tst"
   }
 }
 
@@ -32,8 +32,8 @@ variable "owner" {
   description = "The owne of the deployed resources"
   type        = map
   default     = {
-    "name"    = "Owner Name"
-    "email"   = "owner.name@email.tst"
+    "name"  = "Owner Name"
+    "email" = "owner.name@email.tst"
   }
 }
 
