@@ -19,6 +19,12 @@ variable "region" {
   }
 }
 
+variable "vnt_space" {
+  description = "the address space of the main vnet"
+  type        = list
+  default = ["10.0.0.0/16"]
+}
+
 variable "customer" {
   description = "The main customer (user) of the resource"
   type        = map(string)
@@ -47,4 +53,10 @@ variable "scope" {
   type        = string
   description = "scope"
   default     = "data_platform"
+}
+
+variable "tags" {
+  description = "tags to be used for resources"
+  type        = map
+  default     = { }
 }

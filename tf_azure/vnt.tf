@@ -1,20 +1,20 @@
 #Create Virtual Network
-resource "azurerm_virtual_network" "vnt001" {
-  name                = "vnt-${var.workload}-${var.environment}-${var.region["short"]}-001"
-  address_space       = ["10.0.0.0/16"]
+resource "azurerm_virtual_network" "vnt_main" {
+  name                = local.vnt_main
+  address_space       = var.vnt_space
   location            = var.region["location"]
-  resource_group_name = azurerm_resource_group.rsg001.name
+  resource_group_name = azurerm_resource_group.rsg_main.name
 }
 
-resource "azurerm_network_security_group" "nsg001" {
-  name                = "nsg-${var.workload}-${var.environment}-${var.region["short"]}-001"
+resource "azurerm_network_security_group" "nsg_main" {
+  name                = locals.nsg_main
   location            = var.region["location"]
-  resource_group_name = azurerm_resource_group.rsg001.name
+  resource_group_name = azurerm_resource_group.rsg_main.name
 }
 
 # rule for github actions runner
-resource "azurerm_network_security_rule" "nsgsr001" {
-  name                        = "nsgsr-${var.workload}-${var.environment}-${var.region["short"]}-001"
+resource "azurerm_network_security_rule" "nsr100" {
+  name                        = "nsr-${local.name_conv}-100"
   priority                    = 100
   direction                   = "Inbound"
   access                      = "Allow"
@@ -23,6 +23,6 @@ resource "azurerm_network_security_rule" "nsgsr001" {
   destination_port_range      = "*"
   source_address_prefix       = chomp(data.http.myip.body)
   destination_address_prefix  = "*"
-  resource_group_name         = azurerm_resource_group.rsg001.name
-  network_security_group_name = azurerm_network_security_group.nsg001.name
+  resource_group_name         = azurerm_resource_group.rsg_main.name
+  network_security_group_name = azurerm_network_security_group.nsg_main.name
 }
