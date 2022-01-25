@@ -1,11 +1,11 @@
 variable "workload" {
-  type = string
+  type        = string
   description = "Name of the workload, used in all resurce names"
   default     = "das"
 }
 
 variable "environment" {
-  type = string
+  type        = string
   description = "environment"
   default     = "dev"
 }
@@ -38,13 +38,13 @@ variable "owner" {
 }
 
 variable "costcenter" {
-  type = string
+  type        = string
   description = "costcenter"
   default     = "99999999"
 }
 
 variable "scope" {
-  type = string
+  type        = string
   description = "scope"
   default     = "data_platform"
 }
