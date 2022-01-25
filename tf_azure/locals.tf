@@ -6,15 +6,15 @@
 
 tags = merge( 
   var.tags,
-    {
-      env           = var.environment
-      workload      = var.workload
-      scope         = var.scope
-      costcenter    = var.costcenter
-      customeremail = var.customer["email"]
-      owner         = var.owner["name"]
-      owneremail    = var.owner["email"]
-    },
+  {
+    env           = var.environment
+    workload      = var.workload
+    scope         = var.scope
+    costcenter    = var.costcenter
+    customeremail = var.customer["email"]
+    owner         = var.owner["name"]
+    owneremail    = var.owner["email"]
+  },
 )
 
 #naming convention enforcement
