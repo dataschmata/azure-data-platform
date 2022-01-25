@@ -1,7 +1,7 @@
 resource "azurerm_storage_account" "sta001" {
-  name                     = "stadasdevwesteu001"
+  name                     = "sta${var.workload}${var.environment}${var.region["short"]}001"
   resource_group_name      = azurerm_resource_group.rsg001.name
-  location                 = azurerm_resource_group.rsg001.location
+  location                 = var.region["location"]
   account_tier             = "Standard"
   account_replication_type = "LRS"
   account_kind             = "StorageV2"
