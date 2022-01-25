@@ -8,7 +8,6 @@ costcenter        = "99999999"
 customeremail     = "customer.email@nomail.tst"
 owner             = "Owner Name"
 owneremail        = "owner.email@nomail.tst"
-scope             = "data_platform"
 
 region = {
     "short"       = "weu1"
