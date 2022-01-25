@@ -12,17 +12,17 @@ variable "environment" {
 
 variable "region" {
   description = "Region in which to create the resources, short is used in names and location for location"
-  type        = map
-  default     = {
-    "short"       = "weu1"
-    "location"    = "westeurope"
+  type        = map(string)
+  default = {
+    "short"    = "weu1"
+    "location" = "westeurope"
   }
 }
 
 variable "customer" {
   description = "The main customer (user) of the resource"
-  type        = map
-  default     = {
+  type        = map(string)
+  default = {
     "name"  = "Customer Name"
     "email" = "customer.name@email.tst"
   }
@@ -30,8 +30,8 @@ variable "customer" {
 
 variable "owner" {
   description = "The owne of the deployed resources"
-  type        = map
-  default     = {
+  type        = map(string)
+  default = {
     "name"  = "Owner Name"
     "email" = "owner.name@email.tst"
   }

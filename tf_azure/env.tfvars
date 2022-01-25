@@ -12,4 +12,4 @@ owneremail    = "owner.email@nomail.tst"
 region = {
   "short"    = "weu1"
   "location" = "westeurope"
-  }
+}
