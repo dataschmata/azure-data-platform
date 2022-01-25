@@ -21,8 +21,8 @@ variable "region" {
 
 variable "vnt_space" {
   description = "the address space of the main vnet"
-  type        = list
-  default = ["10.0.0.0/16"]
+  type        = list(string)
+  default     = ["10.0.0.0/16"]
 }
 
 variable "customer" {
@@ -57,6 +57,6 @@ variable "scope" {
 
 variable "tags" {
   description = "tags to be used for resources"
-  type        = map
-  default     = { }
+  type        = map(string)
+  default     = {}
 }
