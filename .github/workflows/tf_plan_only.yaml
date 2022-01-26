@@ -1,4 +1,4 @@
-name: 'Terraform Azure'
+name: 'Terraform Azure Plan Only'
  
 on: 
   workflow_dispatch:
