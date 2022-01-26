@@ -16,7 +16,7 @@ resource "azurerm_subnet_network_security_group_association" "nsga100" {
 # "Public" subnet for databricks needed for control plane
 resource "azurerm_subnet" "snt_pub" {
   name                 = local.snt_pub
-  resource_group_name  = azurerm_resource_group.rsg_dbw.name
+  resource_group_name  = azurerm_resource_group.rsg_main.name
   virtual_network_name = azurerm_virtual_network.vnt_main.name
   address_prefixes     = var.pub_prefix
   delegation {
@@ -49,7 +49,7 @@ resource "azurerm_subnet_network_security_group_association" "nga_pub" {
 # "Privat" subnet for databricks needed for data plane
 resource "azurerm_subnet" "snt_pvt" {
   name                 = local.snt_pvt
-  resource_group_name  = azurerm_resource_group.rsg_dbw.name
+  resource_group_name  = azurerm_resource_group.rsg_main.name
   virtual_network_name = azurerm_virtual_network.vnt_main.name
   address_prefixes     = var.pvt_prefix
   delegation {
