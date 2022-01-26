@@ -1,29 +1,79 @@
-# Create Subnet
+# Create main Subnet
 resource "azurerm_subnet" "snt_main" {
   name                 = local.snt_main
   resource_group_name  = azurerm_resource_group.rsg_main.name
   virtual_network_name = azurerm_virtual_network.vnt_main.name
-  address_prefixes     = ["10.0.1.0/24"]
-  service_endpoints    = ["Microsoft.Storage", "Microsoft.EventHub"]
-}
-
-resource "azurerm_subnet" "sntpub" {
-  name                 = local.snt_pub
-  resource_group_name  = azurerm_resource_group.rsg_main.name
-  virtual_network_name = azurerm_virtual_network.vnt_main.name
-  address_prefixes     = ["10.0.2.0/24"]
-  service_endpoints    = ["Microsoft.Storage", "Microsoft.EventHub"]
-}
-
-resource "azurerm_subnet" "sntpvt" {
-  name                 = local.snt_pub
-  resource_group_name  = azurerm_resource_group.rsg_main.name
-  virtual_network_name = azurerm_virtual_network.vnt_main.name
-  address_prefixes     = ["10.0.3.0/24"]
+  address_space        = var.snt_space
   service_endpoints    = ["Microsoft.Storage", "Microsoft.EventHub"]
 }
 
 resource "azurerm_subnet_network_security_group_association" "nsga100" {
   subnet_id                 = azurerm_subnet.snt_main.id
   network_security_group_id = azurerm_network_security_group.nsg_main.id
+}
+
+###########################################
+# "Public" subnet for databricks needed for control plane
+resource "azurerm_subnet" "snt_pub" {
+  name                 = local.snt_pub
+  resource_group_name  = azurerm_resource_group.rsg_dbw.name
+  virtual_network_name = azurerm_virtual_network.vnt_main.name
+  address_space        = var.pub_space
+  delegation {
+    name = "delegation"
+    service_delegation {
+      name    = "Microsoft.Databricks/workspaces"
+        actions = [
+          "Microsoft.Network/virtualNetworks/subnets/join/action",
+          "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action",
+          "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action",
+        ]
+    }
+  }
+}
+
+# empty security group being filled by databricks workspace deployment + association with subnet
+resource "azurerm_network_security_group" "nsg_pub" {
+  name                = local.nsg_pub
+  location            = var.region["location"]
+  resource_group_name = local.rsg_main
+  tags                = local.tags
+}
+
+resource "azurerm_subnet_network_security_group_association" "nga_pub" {
+  subnet_id                 = azurerm_subnet.snt_pub.id
+  network_security_group_id = azurerm_network_security_group.nsg_pub.id
+}
+
+###########################################
+# "Privat" subnet for databricks needed for data plane
+resource "azurerm_subnet" "snt_pvt" {
+  name                 = local.snt_pvt
+  resource_group_name  = azurerm_resource_group.rsg_dbw.name
+  virtual_network_name = azurerm_virtual_network.vnt_main.name
+  address_space        = var.pvt_space
+  delegation {
+    name = "delegation"
+    service_delegation {
+      name    = "Microsoft.Databricks/workspaces"
+        actions = [
+          "Microsoft.Network/virtualNetworks/subnets/join/action",
+          "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action",
+          "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action",
+        ]
+    }
+  }
+}
+
+# empty security group being filled by databricks workspace deployment + association with subnet
+resource "azurerm_network_security_group" "nsg_pvt" {
+  name                = local.nsg_pvt
+  location            = var.region["location"]
+  resource_group_name = local.rsg_main
+  tags                = local.tags
+}
+
+resource "azurerm_subnet_network_security_group_association" "nga_pvt" {
+  subnet_id                 = azurerm_subnet.snt_pvt.id
+  network_security_group_id = azurerm_network_security_group.nsg_pvt.id
 }
