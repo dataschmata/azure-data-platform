@@ -1,14 +1,3 @@
-variable "workload" {
-  type        = string
-  description = "Name of the workload, used in all resurce names"
-  default     = "das"
-}
-
-variable "environment" {
-  type        = string
-  description = "environment"
-  default     = "dev"
-}
 
 variable "region" {
   description = "Region in which to create the resources, short is used in names and location for location"
@@ -23,6 +12,39 @@ variable "vnt_space" {
   description = "the address space of the main vnet"
   type        = list(string)
   default     = ["10.0.0.0/16"]
+}
+
+variable "snt_prefix" {
+  description = "the address space of the main snt"
+  type        = list(string)
+  default     = ["10.0.0.0/23"]
+}
+
+variable "pub_prefix" {
+  description = "the address space of the public subnet for databricks"
+  type        = list(string)
+  default     = ["10.0.2.0/20"]
+}
+
+variable "pvt_prefix" {
+  description = "the address space of the privat subnet for databricks"
+  type        = list(string)
+  default     = ["10.0.18.0/20"]
+}
+
+#####################################
+# info for tags
+#####################################
+variable "workload" {
+  type        = string
+  description = "Name of the workload, used in all resurce names"
+  default     = "das"
+}
+
+variable "environment" {
+  type        = string
+  description = "environment"
+  default     = "dev"
 }
 
 variable "customer" {

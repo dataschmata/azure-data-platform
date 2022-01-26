@@ -4,6 +4,7 @@ resource "azurerm_eventhub_namespace" "ehn100" {
   resource_group_name = azurerm_resource_group.rsg_main.name
   sku                 = "Standard"
   capacity            = 1
+  tags                = local.tags
   network_rulesets {
     default_action                 = "Deny"
     trusted_service_access_enabled = true
@@ -13,7 +14,7 @@ resource "azurerm_eventhub_namespace" "ehn100" {
   }
 }
 
-resource "azurerm_eventhub" "evh001" {
+resource "azurerm_eventhub" "evh100" {
   name                = "evh-${local.name_conv}-100"
   namespace_name      = azurerm_eventhub_namespace.ehn100.name
   resource_group_name = azurerm_resource_group.rsg_main.name
