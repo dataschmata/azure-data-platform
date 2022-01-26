@@ -10,4 +10,8 @@ resource "azurerm_template_deployment" "sct100" {
     storage_account_name = azurerm_storage_account.sta100.name
     container_name       = "raw"
   }
+  lifecycle {
+  prevent_destroy = true
+  }
+
 }
