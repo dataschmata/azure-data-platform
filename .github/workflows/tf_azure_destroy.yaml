@@ -31,4 +31,4 @@ jobs:
 
     - name: 'Terraform Destroy'
       id: destroy
-      run: terraform destroy -var-file=env.tfvars
+      run: terraform destroy -auto-approve -var-file=env.tfvars
