@@ -23,3 +23,5 @@ vnt_space  = ["10.0.0.0/18"]
 snt_prefix = ["10.0.0.0/20"]
 pub_prefix = ["10.0.16.0/20"]
 pvt_prefix = ["10.0.32.0/20"]
+
+# Data Aggregation Platform setup
