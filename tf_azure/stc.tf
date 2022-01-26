@@ -15,7 +15,7 @@ resource "azurerm_resource_group_template_deployment" "sct100" {
 }
 
 resource "azurerm_storage_data_lake_gen2_path" "adls_dict" {
-  for_each           = toset([ "bronze", "silver", "gold"])
+  for_each           = toset(["bronze", "silver", "gold"])
   depends_on         = [azurerm_resource_group_template_deployment.sct100]
   path               = each.key
   filesystem_name    = "delta"
