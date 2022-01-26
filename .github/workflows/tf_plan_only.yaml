@@ -18,40 +18,39 @@ jobs:
     defaults:
       run:
         shell: bash
- 
+        working-directory: "./tf_azure"
     steps:
     # Checkout the repository to the GitHub Actions runner
-    - name: Checkout
-      uses: actions/checkout@v2
- 
+    - uses: actions/checkout@v2
+    - uses: hashicorp/setup-terraform@v1
+
     - name: 'Terraform Format'
-      uses: hashicorp/terraform-github-actions@master
+      id: fmt
+      run: terraform fmt -check
+      continue-on-error: false
       with:
-        tf_actions_version: 0.14.8
-        tf_actions_subcommand: 'fmt'
-        tf_actions_working_dir: "./tf_azure"
-        args: '-var-file=./tf_azure/env.tfvars'
+        terraform_version: 0.14.8
          
-    - name: 'Terraform Init'
-      uses: hashicorp/terraform-github-actions@master
-      with:
-        tf_actions_version: 0.14.8
-        tf_actions_subcommand: 'init'
-        tf_actions_working_dir: "./tf_azure"
-        args: '-var-file="env.tfvars"'
+    # - name: 'Terraform Init'
+    #   uses: hashicorp/terraform-github-actions@master
+    #   with:
+    #     tf_actions_version: 0.14.8
+    #     tf_actions_subcommand: 'init'
+    #     tf_actions_working_dir: "./tf_azure"
+    #     args: '-var-file="env.tfvars"'
  
-    - name: 'Terraform Validate'
-      uses: hashicorp/terraform-github-actions@master
-      with:
-        tf_actions_version: 0.14.8
-        tf_actions_subcommand: 'validate'
-        tf_actions_working_dir: "./tf_azure"
-        args: '-var-file="env.tfvars"'
+    # - name: 'Terraform Validate'
+    #   uses: hashicorp/terraform-github-actions@master
+    #   with:
+    #     tf_actions_version: 0.14.8
+    #     tf_actions_subcommand: 'validate'
+    #     tf_actions_working_dir: "./tf_azure"
+    #     args: '-var-file="env.tfvars"'
          
-    - name: 'Terraform Plan'
-      uses: hashicorp/terraform-github-actions@master
-      with:
-        tf_actions_version: 0.14.8
-        tf_actions_subcommand: 'plan'
-        tf_actions_working_dir: "./tf_azure"
-        args: '-var-file="env.tfvars"'
+    # - name: 'Terraform Plan'
+    #   uses: hashicorp/terraform-github-actions@master
+    #   with:
+    #     tf_actions_version: 0.14.8
+    #     tf_actions_subcommand: 'plan'
+    #     tf_actions_working_dir: "./tf_azure"
+    #     args: '-var-file="env.tfvars"'
