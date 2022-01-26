@@ -7,7 +7,8 @@ resource "azurerm_resource_group_template_deployment" "sct100" {
   resource_group_name = azurerm_resource_group.rsg_main.name
   deployment_mode     = "Incremental"
   template_content    = file("${path.module}/container.json")
-
+  tags                = local.tags
+  
   parameters_content = jsonencode({
     "storage_account_name" = { value = azurerm_storage_account.sta100.name },
     "container_name"       = { value = each.key }

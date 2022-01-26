@@ -6,6 +6,7 @@ resource "azurerm_storage_account" "sta100" {
   account_replication_type = "LRS"
   account_kind             = "StorageV2"
   is_hns_enabled           = "true"
+  tags                     = local.tags
   network_rules {
     default_action             = "Deny"
     ip_rules                   = [chomp(data.http.myip.body)]
