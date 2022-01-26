@@ -10,10 +10,10 @@ owner         = "Owner Name"
 owneremail    = "owner.email@nomail.tst"
 
 # pub_space and pvt_sapce for databricks needs to be the same size. used for cluster vms
-vnt_space  = ["10.0.0.0/16"]
-snt_prefix = ["10.0.0.0/23"]
-pub_prefix = ["10.0.2.0/20"]
-pvt_prefix = ["10.0.18.0/20"]
+vnt_space  = ["10.0.0.0/18"]
+snt_prefix = ["10.0.0.0/20"]
+pub_prefix = ["10.0.16.0/20"]
+pvt_prefix = ["10.0.32.0/20"]
 
 region = {
   "short"    = "weu1"
