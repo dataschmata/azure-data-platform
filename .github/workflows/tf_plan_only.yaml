@@ -30,7 +30,7 @@ jobs:
         tf_actions_version: 0.14.8
         tf_actions_subcommand: 'fmt'
         tf_actions_working_dir: "./tf_azure"
-        args: '-var-file="env.tfvars"'
+        args: '-var-file="./tf_azure/env.tfvars"'
          
     - name: 'Terraform Init'
       uses: hashicorp/terraform-github-actions@master
