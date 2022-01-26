@@ -30,10 +30,10 @@ locals {
   nsg_main = "nsg-${local.name_conv}-100"
 
   rsg_dbw = "rsg-${local.name_conv}-110" # resource group for databricks
-  snt_pub = "pub"
-  snt_pvt = "pvt"
-  nsg_pub = "nsg-${local.name_conv}-100-${local.snt_pub}"
-  nsg_pvt = "nsg-${local.name_conv}-100-${local.snt_pvt}"
+  snt_pub = "${local.snt_main}-pub"
+  snt_pvt = "${local.snt_main}-pvt"
+  nsg_pub = "${local.nsg_main}-pub"
+  nsg_pvt = "${local.nsg_main}-pvt"
 
   lck_main = "lck-${local.name_conv}-100"
 
