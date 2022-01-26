@@ -9,6 +9,8 @@ customeremail = "customer.email@nomail.tst"
 owner         = "Owner Name"
 owneremail    = "owner.email@nomail.tst"
 
+vnt_space = ["10.0.0.0/16"]
+
 region = {
   "short"    = "weu1"
   "location" = "westeurope"
