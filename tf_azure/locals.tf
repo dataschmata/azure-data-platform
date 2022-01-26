@@ -3,7 +3,7 @@
 #  General setup needed for all resources
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+locals {
 tags = merge(
   var.tags,
   {
@@ -25,19 +25,19 @@ name_cosh = "${var.region["short"]}-${local.env_short}"
 
 # resource group, vnet and subnet for majority of resources imcl databricks
 rsg_main = "rsg-${local.name_conv}-100"
-lck100   = "lck-${local.name_conv}-100"
-
-rsg_dbw  = "rsg-${local.name_conv}-110" # resource group for databricks
 vnt_main = "vnt-${local.name_conv}-100"
 snt_main = "snt-${local.name_conv}-100"
-snt_pub  = "pub"
-snt_pvt  = "pvt"
-
 nsg_main = "nsg-${local.name_conv}-100"
-nsg_pub  = "nsg-${local.name_conv}-100-${local.snt_pub}"
-nsg_pvt  = "nsg-${local.name_conv}-100-${local.snt_pvt}"
 
-udr001 = "udr-${local.name_conv}-100"
+rsg_dbw = "rsg-${local.name_conv}-110" # resource group for databricks
+snt_pub = "pub"
+snt_pvt = "pvt"
+nsg_pub = "nsg-${local.name_conv}-100-${local.snt_pub}"
+nsg_pvt = "nsg-${local.name_conv}-100-${local.snt_pvt}"
+
+lck_main = "lck-${local.name_conv}-100"
 
 # KeyVault
-kvt100 = "kvt-${local.name_conv}-100"
+kvt_main = "kvt-${local.name_conv}-100"
+
+}
