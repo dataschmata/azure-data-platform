@@ -44,7 +44,7 @@ jobs:
 
     - name: 'Terraform Plan'
       id: plan
-      run: terraform plan -var-file=env.tfvars -out
+      run: terraform plan -var-file=env.tfvars
       continue-on-error: false
 
     - name: 'Terraform Apply'
