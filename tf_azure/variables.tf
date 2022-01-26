@@ -8,6 +8,12 @@ variable "region" {
   # }
 }
 
+variable "sta_containers" {
+  description = "the file systems to be created in the lake"
+  type        = list(string)
+  default     = ["raw", "delta", "landing", "sandbox"]
+}
+
 variable "vnt_space" {
   description = "the address space of the main vnet"
   type        = list(string)

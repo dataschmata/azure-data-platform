@@ -3,6 +3,8 @@ workload    = "das"
 scope       = "data_platform"
 costcenter  = "99999999"
 
+sta_containers = ["raw", "delta", "landing", "sandbox"]
+
 region = {
   "short"    = "weu1"
   "location" = "westeurope"
