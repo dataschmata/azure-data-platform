@@ -28,8 +28,7 @@ jobs:
       id: fmt
       run: terraform fmt -check
       continue-on-error: false
-      with:
-        terraform_version: 0.14.8
+
          
     # - name: 'Terraform Init'
     #   uses: hashicorp/terraform-github-actions@master
