@@ -2,34 +2,34 @@
 variable "region" {
   description = "Region in which to create the resources, short is used in names and location for location"
   type        = map(string)
-  default = {
-    "short"    = "weu1"
-    "location" = "westeurope"
-  }
+  # default = {
+  #   "short"    = "weu1"
+  #   "location" = "westeurope"
+  # }
 }
 
 variable "vnt_space" {
   description = "the address space of the main vnet"
   type        = list(string)
-  default     = ["10.0.0.0/16"]
+  # default     = ["10.0.0.0/16"]
 }
 
 variable "snt_prefix" {
   description = "the address space of the main snt"
   type        = list(string)
-  default     = ["10.0.0.0/23"]
+  # default     = ["10.0.0.0/23"]
 }
 
 variable "pub_prefix" {
   description = "the address space of the public subnet for databricks"
   type        = list(string)
-  default     = ["10.0.2.0/20"]
+  # default     = ["10.0.2.0/20"]
 }
 
 variable "pvt_prefix" {
   description = "the address space of the privat subnet for databricks"
   type        = list(string)
-  default     = ["10.0.18.0/20"]
+  # default     = ["10.0.18.0/20"]
 }
 
 #####################################
@@ -38,7 +38,7 @@ variable "pvt_prefix" {
 variable "workload" {
   type        = string
   description = "Name of the workload, used in all resurce names"
-  default     = "das"
+  # default     = "das"
 }
 
 variable "environment" {
