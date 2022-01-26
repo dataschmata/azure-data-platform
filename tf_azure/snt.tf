@@ -25,5 +25,5 @@ resource "azurerm_subnet" "sntpvt" {
 
 resource "azurerm_subnet_network_security_group_association" "nsga100" {
   subnet_id                 = azurerm_subnet.snt_main.id
-  network_security_group_id = azurerm_network_security_group.nsg001.id
+  network_security_group_id = azurerm_network_security_group.nsg_main.id
 }
