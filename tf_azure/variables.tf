@@ -14,19 +14,19 @@ variable "vnt_space" {
   default     = ["10.0.0.0/16"]
 }
 
-variable "snt_space" {
+variable "snt_prefix" {
   description = "the address space of the main snt"
   type        = list(string)
   default     = ["10.0.0.0/23"]
 }
 
-variable "pub_space" {
+variable "pub_prefix" {
   description = "the address space of the public subnet for databricks"
   type        = list(string)
   default     = ["10.0.2.0/20"]
 }
 
-variable "pvt_space" {
+variable "pvt_prefix" {
   description = "the address space of the privat subnet for databricks"
   type        = list(string)
   default     = ["10.0.18.0/20"]

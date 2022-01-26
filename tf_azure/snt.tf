@@ -3,7 +3,7 @@ resource "azurerm_subnet" "snt_main" {
   name                 = local.snt_main
   resource_group_name  = azurerm_resource_group.rsg_main.name
   virtual_network_name = azurerm_virtual_network.vnt_main.name
-  address_space        = var.snt_space
+  address_prefixes     = var.snt_prefix
   service_endpoints    = ["Microsoft.Storage", "Microsoft.EventHub"]
 }
 
@@ -18,7 +18,7 @@ resource "azurerm_subnet" "snt_pub" {
   name                 = local.snt_pub
   resource_group_name  = azurerm_resource_group.rsg_dbw.name
   virtual_network_name = azurerm_virtual_network.vnt_main.name
-  address_space        = var.pub_space
+  address_prefixes     = var.pub_prefix
   delegation {
     name = "delegation"
     service_delegation {
@@ -51,7 +51,7 @@ resource "azurerm_subnet" "snt_pvt" {
   name                 = local.snt_pvt
   resource_group_name  = azurerm_resource_group.rsg_dbw.name
   virtual_network_name = azurerm_virtual_network.vnt_main.name
-  address_space        = var.pvt_space
+  address_prefixes     = var.pvt_prefix
   delegation {
     name = "delegation"
     service_delegation {
