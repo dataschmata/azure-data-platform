@@ -18,7 +18,7 @@ locals {
   )
 
   #naming convention enforcement
-  env_short = substr(local.environment, 0, 1)
+  env_short = substr(var.environment, 0, 1)
   workload  = lower(var.workload)
   name_conv = "${local.workload}-${var.region["short"]}-${local.env_short}"
   name_cosh = "${var.region["short"]}-${local.env_short}"
