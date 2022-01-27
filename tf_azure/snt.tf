@@ -36,7 +36,7 @@ resource "azurerm_subnet" "snt_pub" {
 resource "azurerm_network_security_group" "nsg_pub" {
   name                = local.nsg_pub
   location            = var.region["location"]
-  resource_group_name = local.rsg_main
+  resource_group_name = azurerm_resource_group.rsg_main.name
   tags                = local.tags
 }
 
@@ -69,7 +69,7 @@ resource "azurerm_subnet" "snt_pvt" {
 resource "azurerm_network_security_group" "nsg_pvt" {
   name                = local.nsg_pvt
   location            = var.region["location"]
-  resource_group_name = local.rsg_main
+  resource_group_name = azurerm_resource_group.rsg_main.name
   tags                = local.tags
 }
 
