@@ -1,11 +1,23 @@
+####################################
+# User
+####################################
+variable "admin_email" {
+  description = "email address list of admins of platform"
+  type        = list(string)
+}
+
+variable "admin_dbw_email" {
+  description = "email address list of admins of databricks"
+  type        = list(string)
+}
 
 variable "region" {
   description = "Region in which to create the resources, short is used in names and location for location"
   type        = map(string)
-  # default = {
-  #   "short"    = "weu1"
-  #   "location" = "westeurope"
-  # }
+  default = {
+    "short"    = "weu1"
+    "location" = "westeurope"
+  }
 }
 
 variable "sta_containers" {
