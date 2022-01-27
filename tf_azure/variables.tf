@@ -11,7 +11,10 @@ variable "admin_dbw_email" {
   type        = list(string)
 }
 
-variable "openDoor" {}
+variable "openDoor" {
+  type    = string
+  default = ""
+}
 
 variable "region" {
   description = "Region in which to create the resources, short is used in names and location for location"
