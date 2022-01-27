@@ -5,6 +5,10 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "~>2.93.1"
     }
+    azuread = {
+      source = "hashicorp/azuread"
+      version = "2.15.0"
+    }
     databricks = {
       source  = "databrickslabs/databricks"
       version = "0.4.4"
@@ -25,5 +29,9 @@ provider "azurerm" {
 }
 
 provider "databricks" {
+  # Configuration options
+}
+
+provider "azuread" {
   # Configuration options
 }

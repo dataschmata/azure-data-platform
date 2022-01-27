@@ -1,3 +1,15 @@
+####################################
+# User
+####################################
+variable "admin_email" {
+  description = "email address list of admins of platform"
+  type        = string
+}
+
+variable "admin_dbw_email" {
+  description = "email address list of admins of databricks"
+  type        = string
+}
 
 variable "region" {
   description = "Region in which to create the resources, short is used in names and location for location"
