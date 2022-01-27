@@ -3,12 +3,12 @@
 ####################################
 variable "admin_email" {
   description = "email address list of admins of platform"
-  type        = string
+  type        = list(string)
 }
 
 variable "admin_dbw_email" {
   description = "email address list of admins of databricks"
-  type        = string
+  type        = list(string)
 }
 
 variable "region" {
