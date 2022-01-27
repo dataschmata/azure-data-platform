@@ -14,6 +14,6 @@ resource "azurerm_role_assignment" "role_adm" {
 resource "azurerm_role_assignment" "role_adm_dbw" {
   for_each             = azuread_group.grp_adm_dbw
   scope                = azurerm_databricks_workspace.dbw100.id
-  role_definition_name = "Contributor"
+  role_definition_name = "Owner"
   principal_id         = each.value.object_id
 }
