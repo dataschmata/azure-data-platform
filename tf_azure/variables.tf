@@ -14,10 +14,10 @@ variable "admin_dbw_email" {
 variable "region" {
   description = "Region in which to create the resources, short is used in names and location for location"
   type        = map(string)
-  # default = {
-  #   "short"    = "weu1"
-  #   "location" = "westeurope"
-  # }
+  default = {
+    "short"    = "weu1"
+    "location" = "westeurope"
+  }
 }
 
 variable "sta_containers" {
