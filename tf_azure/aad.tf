@@ -18,7 +18,7 @@ resource "azuread_user" "usr_adm_dbw" {
 resource "azuread_group" "grp_adm" {
   for_each         = azuread_user.usr_adm
   display_name     = "az-${local.workload}-admin"
-  owners           = [ata.azurerm_client_config.cfg.object_id]
+  owners           = [data.azuread_client_config.ad_current.object_id]
   security_enabled = true
 
   members = [
@@ -30,7 +30,7 @@ resource "azuread_group" "grp_adm" {
 resource "azuread_group" "grp_adm_dbw" {
   for_each         = azuread_user.usr_adm_dbw
   display_name     = "az-${local.workload}-admin_dbw"
-  owners           = [ata.azurerm_client_config.cfg.object_id]
+  owners           = [data.azuread_client_config.ad_current.object_id]
   security_enabled = true
 
   members = [
