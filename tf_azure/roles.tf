@@ -5,13 +5,15 @@ resource "azurerm_role_assignment" "role100" {
 }
 
 resource "azurerm_role_assignment" "role_adm" {
+  for_each             = azuread_group.grp_adm
   scope                = azurerm_resource_group.rsg_main.id
   role_definition_name = "Owner"
-  principal_id         = azuread_group.grp_adm[each.key]
+  principal_id         = each.key
 }
 
 resource "azurerm_role_assignment" "role_adm_dbw" {
+  for_each             = azuread_group.grp_adm_dbw
   scope                = azurerm_databricks_workspace.dbw100.id
   role_definition_name = "Contributor"
-  principal_id         = azuread_group.grp_adm_dbw[each.key]
+  principal_id         = each.key
 }
