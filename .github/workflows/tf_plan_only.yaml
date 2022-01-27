@@ -2,6 +2,9 @@ name: 'Terraform Azure Plan Only'
  
 on: 
   workflow_dispatch:
+  push:
+    branches:
+    - main_azure
  
 jobs:
   terraform:
