@@ -27,7 +27,7 @@ snt_prefix = ["10.0.0.0/20"]
 pub_prefix = ["10.0.16.0/20"]
 pvt_prefix = ["10.0.32.0/20"]
 
-admin_email     = ["dennis.rossberg@posteo.de", "deross@posteo.eu"]
-admin_dbw_email = ["rocksde@posteo.eu"]
+admin_email     = ["admin@dataschmata.com"]
+admin_dbw_email = ["dbw_admin@dataschmata.com"]
 
 # Data Aggregation Platform setup
