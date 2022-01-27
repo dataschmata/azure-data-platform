@@ -22,7 +22,7 @@ resource "azuread_group" "grp_adm" {
   security_enabled = true
 
   members = [
-      each.value.object_id,
+    each.value.object_id,
     /* more users */
   ]
 }
@@ -34,7 +34,7 @@ resource "azuread_group" "grp_adm_dbw" {
   security_enabled = true
 
   members = [
-      each.value.object_id,
+    each.value.object_id,
     /* more users */
   ]
 }
