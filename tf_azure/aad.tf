@@ -2,7 +2,7 @@
 resource "azuread_user" "usr_adm" {
   for_each            = toset(var.admin_email)
   display_name        = each.key
-  owners              = [data.azuread_client_config.ad_current.object_id]
+  # owners              = [data.azuread_client_config.ad_current.object_id]
   password            = "This1sA8adPa$$w0rd1!"
   user_principal_name = each.key
 }
@@ -10,7 +10,7 @@ resource "azuread_user" "usr_adm" {
 resource "azuread_user" "usr_adm_dbw" {
   for_each            = toset(var.admin_dbw_email)
   display_name        = each.key
-  owners              = [data.azuread_client_config.ad_current.object_id]
+  # owners              = [data.azuread_client_config.ad_current.object_id]
   password            = "This1sA8adPa$$w0rd1!"
   user_principal_name = each.key
 }
