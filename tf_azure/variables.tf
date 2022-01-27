@@ -38,6 +38,12 @@ variable "pvt_prefix" {
   # default     = ["10.0.18.0/20"]
 }
 
+variable "sta_replication" {
+  description = "Defines the type of replication to use for this storage account."
+  type        = string
+  default     = "LRS"
+  }
+
 #####################################
 # info for tags
 #####################################
