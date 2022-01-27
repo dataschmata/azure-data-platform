@@ -51,4 +51,6 @@ jobs:
       if: github.ref == 'refs/heads/main'
       id: apply
       run: terraform apply -auto-approve -var-file=env.tfvars
+      env:
+        TF_VAR_openDoor: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
       

@@ -30,6 +30,10 @@ provider "azurerm" {
 
 provider "databricks" {
   # Configuration options
+  azure_workspace_resource_id = azurerm_databricks_workspace.dbw100.id
+  azure_client_id             = data.azurerm_client_config.cfg.client_id
+  azure_client_secret         = var.openDoor
+  azure_tenant_id             = data.azurerm_client_config.cfg.tenant_id
 }
 
 provider "azuread" {
