@@ -14,7 +14,7 @@ resource "azurerm_storage_account" "sta100" {
     default_action             = "Deny"
     ip_rules                   = [chomp(data.http.myip.body)]
     virtual_network_subnet_ids = [azurerm_subnet.snt_main.id]
-    bypass                     = ["Logging","AzureServices","Metrics"] 
+    bypass                     = ["Logging", "AzureServices", "Metrics"] 
   }
 }
 
@@ -23,19 +23,19 @@ resource "azurerm_advanced_threat_protection" "atp100" {
   enabled            = true
 }
 
-resource "azurerm_private_endpoint" "pep_sta100" {
-  name                = "pep-snt100-sta100-${local.name_conv}"
-  location            = var.region["location"]
-  resource_group_name = azurerm_resource_group.rsg_main.name
-  subnet_id           = azurerm_subnet.snt_main.id
-  tags                = local.tags
-  private_service_connection {
-    name                           = "pep-snt100-sta100-${local.name_conv}"
-    private_connection_resource_id = azurerm_storage_account.sta100.id
-    subresource_names              = ["dfs"]
-    is_manual_connection           = false
-  }
-}
+# resource "azurerm_private_endpoint" "pep_sta100" {
+#   name                = "pep-snt100-sta100-${local.name_conv}"
+#   location            = var.region["location"]
+#   resource_group_name = azurerm_resource_group.rsg_main.name
+#   subnet_id           = azurerm_subnet.snt_main.id
+#   tags                = local.tags
+#   private_service_connection {
+#     name                           = "pep-snt100-sta100-${local.name_conv}"
+#     private_connection_resource_id = azurerm_storage_account.sta100.id
+#     subresource_names              = ["dfs"]
+#     is_manual_connection           = false
+#   }
+# }
 
 ### known issue https://github.com/hashicorp/terraform-provider-azurerm/issues/2977, usin ARM template as suggested in issue
 # resource "azurerm_storage_container" "stc001" {
