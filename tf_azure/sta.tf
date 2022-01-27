@@ -14,14 +14,8 @@ resource "azurerm_storage_account" "sta100" {
     default_action             = "Deny"
     ip_rules                   = [chomp(data.http.myip.body)]
     virtual_network_subnet_ids = [azurerm_subnet.snt_main.id]
-    bypass                     = [ "Logging","AzureServices","Metrics" ] 
+    bypass                     = ["Logging","AzureServices","Metrics"] 
   }
-}
-
-resource "azurerm_role_assignment" "role100" {
-  scope                = azurerm_resource_group.rsg_main.id
-  role_definition_name = "Storage Blob Data Owner"
-  principal_id         = data.azurerm_client_config.cfg.object_id
 }
 
 resource "azurerm_advanced_threat_protection" "atp100" {
@@ -38,7 +32,7 @@ resource "azurerm_private_endpoint" "pep_sta100" {
   private_service_connection {
     name                           = "pep-snt100-sta100-${local.name_conv}"
     private_connection_resource_id = azurerm_storage_account.sta100.id
-    subresource_names              = [ "dfs" ]
+    subresource_names              = ["dfs"]
     is_manual_connection           = false
   }
 }

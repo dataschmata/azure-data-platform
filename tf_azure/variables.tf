@@ -42,7 +42,7 @@ variable "sta_replication" {
   description = "Defines the type of replication to use for this storage account."
   type        = string
   default     = "LRS"
-  }
+}
 
 #####################################
 # info for tags
