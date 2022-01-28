@@ -21,6 +21,8 @@ owner = {
   "email" = "owner.email@nomail.tst"
 }
 
+addtl_tags = {}
+
 # pub_space and pvt_sapce for databricks needs to be the same size. used for cluster vms
 vnt_space  = ["10.0.0.0/18"]
 snt_prefix = ["10.0.0.0/20"]

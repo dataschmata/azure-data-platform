@@ -13,7 +13,7 @@ variable "admin_dbw_email" {
 
 variable "openDoor" {
   description = "Opens the door for databricks provider"
-  type        = string 
+  type        = string
 }
 
 variable "tf_state_rsg" {
@@ -112,7 +112,7 @@ variable "scope" {
   description = "scope"
 }
 
-variable "tags" {
+variable "addtl_tags" {
   description = "additional tags to be used for resources"
   type        = map(string)
 }
