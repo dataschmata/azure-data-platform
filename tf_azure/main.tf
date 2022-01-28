@@ -11,7 +11,7 @@ terraform {
     }
     databricks = {
       source  = "databrickslabs/databricks"
-      version = "0.4.4"
+      version = "0.4.6"
     }
   }
 
@@ -30,10 +30,11 @@ provider "azurerm" {
 
 provider "databricks" {
   # Configuration options
-  azure_workspace_resource_id = azurerm_databricks_workspace.dbw100.id
-  azure_client_id             = var.client_id
-  azure_client_secret         = var.openDoor
-  azure_tenant_id             = var.tenant_id
+  host = azurerm_databricks_workspace.dbw100.workspace_url
+  # azure_workspace_resource_id = azurerm_databricks_workspace.dbw100.id
+  # azure_client_id             = var.client_id
+  # azure_client_secret         = var.openDoor
+  # azure_tenant_id             = var.tenant_id
 }
 
 provider "azuread" {
