@@ -14,15 +14,17 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-      TF_VAR_openDoor: ${{ secrets.ARM_CLIENT_SECRET }}
+      TF_VAR_tf_state_rsg: ${{ secrets.TF_STATE_RSG }}
+      TF_VAR_tf_state_sta: ${{ secrets.TF_STATE_STA }}
+      TF_VAR_openDoor: ${ARM_CLIENT_SECRET}
     runs-on: ubuntu-latest
-    environment: production
  
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
         shell: bash
         working-directory: "./tf_azure"
+
     steps:
     # Checkout the repository to the GitHub Actions runner
     - uses: actions/checkout@v2
@@ -32,12 +34,16 @@ jobs:
 
     - name: 'Terraform Format'
       id: fmt
-      run: terraform fmt -diff -check
+      run: terraform fmt -diff
       continue-on-error: false
 
     - name: 'Terraform Init'
       id: init
-      run: terraform init -var-file=env.tfvars
+      run: | 
+        terraform init \
+          -var-file=env.tfvars \
+          -backend-config=resource_group_name=${TF_VAR_tf_state_rsg} \
+          -backend-config=storage_account_name=${TF_VAR_tf_state_sta}
  
     - name: 'Terraform Validate'
       id: validate
@@ -46,7 +52,6 @@ jobs:
     - name: 'Terraform Plan'
       id: plan
       run: terraform plan -var-file=env.tfvars
-      continue-on-error: false
 
     - name: 'Terraform Apply'
       if: github.ref == 'refs/heads/main'
