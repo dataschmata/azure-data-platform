@@ -16,16 +16,6 @@ variable "openDoor" {
   type        = string
 }
 
-variable "tf_state_rsg" {
-  description = "Resource group for the backend for TF state file"
-  type        = string
-}
-
-variable "tf_state_sta" {
-  description = "Storage account for the backend for TF state file"
-  type        = string
-}
-
 variable "region" {
   description = "Region in which to create the resources, short is used in names and location for location"
   type        = map(string)

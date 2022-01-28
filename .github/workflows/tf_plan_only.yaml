@@ -15,6 +15,7 @@ jobs:
       ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
       TF_VAR_tf_state_rsg: ${{ secrets.TF_STATE_RSG }}
+      TF_VAR_tf_state_sta: ${{ secrets.TF_STATE_STA }}
       TF_VAR_openDoor: ${ARM_CLIENT_SECRET}
     runs-on: ubuntu-latest
  
@@ -38,7 +39,9 @@ jobs:
 
     - name: 'Terraform Init'
       id: init
-      run: terraform init -var-file=env.tfvars -backend-config="resource_group_name=${TF_VAR_tf_state_rsg}"
+      run: terraform init -var-file=env.tfvars -backend-config=\
+        resource_group_name=${TF_VAR_tf_state_rsg} \
+        storage_account_name=${TF_VAR_tf_state_sta}
  
     - name: 'Terraform Validate'
       id: validate
