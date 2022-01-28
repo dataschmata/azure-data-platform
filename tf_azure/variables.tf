@@ -12,8 +12,14 @@ variable "admin_dbw_email" {
 }
 
 variable "openDoor" {
-  type    = string
-  default = ""
+  description = "Opens the door for databricks provider"
+  type        = string
+}
+
+variable "dbw_sku" {
+  description = "Databricks workspace SKU"
+  type        = string
+  default     = "standard"
 }
 
 variable "region" {
@@ -34,25 +40,25 @@ variable "sta_containers" {
 variable "vnt_space" {
   description = "the address space of the main vnet"
   type        = list(string)
-  # default     = ["10.0.0.0/16"]
+  default     = ["10.0.0.0/18"]
 }
 
 variable "snt_prefix" {
   description = "the address space of the main snt"
   type        = list(string)
-  # default     = ["10.0.0.0/23"]
+  default     = ["10.0.0.0/20"]
 }
 
 variable "pub_prefix" {
   description = "the address space of the public subnet for databricks"
   type        = list(string)
-  # default     = ["10.0.2.0/20"]
+  default     = ["10.0.16.0/20"]
 }
 
 variable "pvt_prefix" {
   description = "the address space of the privat subnet for databricks"
   type        = list(string)
-  # default     = ["10.0.18.0/20"]
+  default     = ["10.0.32.0/20"]
 }
 
 variable "sta_replication" {
@@ -66,14 +72,12 @@ variable "sta_replication" {
 #####################################
 variable "workload" {
   type        = string
-  description = "Name of the workload, used in all resurce names"
-  # default     = "das"
+  description = "Name of the workload, used in all resource names"
 }
 
 variable "environment" {
   type        = string
   description = "environment"
-  default     = "dev"
 }
 
 variable "customer" {
@@ -97,17 +101,14 @@ variable "owner" {
 variable "costcenter" {
   type        = string
   description = "costcenter"
-  default     = "99999999"
 }
 
 variable "scope" {
   type        = string
   description = "scope"
-  default     = "data_platform"
 }
 
-variable "tags" {
-  description = "tags to be used for resources"
+variable "addtl_tags" {
+  description = "additional tags to be used for resources"
   type        = map(string)
-  default     = {}
 }

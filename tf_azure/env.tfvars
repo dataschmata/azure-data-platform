@@ -5,6 +5,7 @@ costcenter  = "99999999"
 
 sta_containers  = ["raw", "delta", "landing", "sandbox"]
 sta_replication = "LRS"
+dbw_sku         = "standard"
 
 region = {
   "short"    = "weu1"
@@ -19,6 +20,11 @@ customer = {
 owner = {
   "name"  = "Owner Name"
   "email" = "owner.email@nomail.tst"
+}
+
+addtl_tags = {
+  "test1" = "test one"
+  "test2" = "test two"
 }
 
 # pub_space and pvt_sapce for databricks needs to be the same size. used for cluster vms

@@ -16,10 +16,8 @@ terraform {
   }
 
   backend "azurerm" {
-    resource_group_name  = "rsg-terraform-dev-westeu-001"
-    storage_account_name = "statfsdevwesteu001"
-    container_name       = "tfstate"
-    key                  = "dasdev.tfstate"
+    container_name = "tfstate"
+    key            = "terraform.tfstate"
   }
 }
 
@@ -31,9 +29,9 @@ provider "azurerm" {
 provider "databricks" {
   # Configuration options
   azure_workspace_resource_id = azurerm_databricks_workspace.dbw100.id
-  azure_client_id             = data.azurerm_client_config.cfg.client_id
+  azure_client_id             = local.client_id
   azure_client_secret         = var.openDoor
-  azure_tenant_id             = data.azurerm_client_config.cfg.tenant_id
+  azure_tenant_id             = local.tenant_id
 }
 
 provider "azuread" {
