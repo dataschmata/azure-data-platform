@@ -28,6 +28,6 @@ pub_prefix = ["10.0.16.0/20"]
 pvt_prefix = ["10.0.32.0/20"]
 
 admin_email     = ["admin@dataschmata.com"]
-admin_dbw_email = ["dbw_admin@dataschmata.com"]
+admin_dbw_email = ["dbw_admin@dataschmata.com", "admin@dataschmata.com"]
 
 # Data Aggregation Platform setup
