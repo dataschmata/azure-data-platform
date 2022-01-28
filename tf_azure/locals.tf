@@ -19,6 +19,10 @@ locals {
     },
   )
 
+  tenant_id = data.azurerm_client_config.cfg.tenant_id
+  sub_id    = data.azurerm_client_config.cfg.tenant_id
+  client_id = data.azurerm_client_config.cfg.client_id
+
   #naming convention enforcement
   env_short = substr(var.environment, 0, 1)
   workload  = lower(var.workload)

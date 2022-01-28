@@ -19,7 +19,7 @@ variable "openDoor" {
 variable "dbw_sku" {
   description = "Databricks workspace SKU"
   type        = string
-  default     = "Standard" 
+  default     = "standard"
 }
 
 variable "region" {

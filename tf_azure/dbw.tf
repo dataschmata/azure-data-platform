@@ -57,13 +57,15 @@ resource "databricks_cluster" "db_cluster_std" {
 
 resource "databricks_azure_adls_gen2_mount" "db_mount" {
   for_each               = toset(var.sta_containers)
-  container_name         = each.key
-  storage_account_name   = local.sta_dbw
-  mount_name             = each.key
-  tenant_id              = data.azurerm_client_config.cfg.tenant_id
-  client_id              = data.azurerm_client_config.cfg.client_id
-  client_secret_scope    = databricks_secret_scope.secret_scope.name
-  client_secret_key      = databricks_secret.secret.key
-  cluster_id             = databricks_cluster.db_cluster_std.id
-  initialize_file_system = true
+  name                   = each.key
+  
+  uri = "abfss://${each.key}@${local.sta_dbw}.dfs.core.windows.net"
+  extra_configs = {
+    "fs.azure.account.auth.type" : "OAuth",
+    "fs.azure.account.oauth.provider.type" : "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider",
+    "fs.azure.account.oauth2.client.id" : local.client_id,
+    "fs.azure.account.oauth2.client.secret" : "secrets/terraform/terraform_secret",
+    "fs.azure.account.oauth2.client.endpoint" : "https://login.microsoftonline.com/${local.tenant_id}/oauth2/token",
+    "fs.azure.createRemoteFileSystemDuringInitialization" : "false",
+  }
 }
