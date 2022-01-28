@@ -55,7 +55,7 @@ resource "databricks_cluster" "db_cluster_std" {
   # }
 }
 
-resource "databricks_azure_adls_gen2_mount" "db_mount" {
+resource "databricks_mount" "db_mount" {
   for_each               = toset(var.sta_containers)
   name                   = each.key
   
