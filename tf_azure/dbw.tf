@@ -56,8 +56,9 @@ resource "databricks_cluster" "db_cluster_std" {
 }
 
 resource "databricks_mount" "db_mount" {
-  for_each = toset(var.sta_containers)
-  name     = each.key
+  for_each   = toset(var.sta_containers)
+  name       = each.key
+  cluster_id = [databricks_cluster.db_cluster_std]
 
   uri = "abfss://${each.key}@${local.sta_dbw}.dfs.core.windows.net"
   extra_configs = {
