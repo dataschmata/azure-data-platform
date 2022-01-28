@@ -17,12 +17,17 @@ variable "openDoor" {
 }
 
 variable "tenant_id" {
-  description = "Opens the door for databricks provider"
+  description = "tenant id"
   type        = string
 }
 
 variable "subscription_id" {
-  description = "Opens the door for databricks provider"
+  description = "subscription id"
+  type        = string
+}
+
+variable "client_id" {
+  description = "client id"
   type        = string
 }
 
