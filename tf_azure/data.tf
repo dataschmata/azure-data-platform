@@ -8,6 +8,7 @@ data "azuread_client_config" "ad_current" {}
 
 data "databricks_group" "admins" {
   display_name = "admins"
+  depends_on   = [azurerm_databricks_workspace.dbw100]
 }
 
 
