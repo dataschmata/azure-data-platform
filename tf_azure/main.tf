@@ -16,6 +16,7 @@ terraform {
   }
 
   backend "azurerm" {
+  # rsg and sta expected in -backend-config for terraform init in pipeline
     container_name = "tfstate"
     key            = "terraform.tfstate"
   }
@@ -23,6 +24,10 @@ terraform {
 
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
+  client_id       = local.client_id
+  client_secret   = var.openDoor
+  tenant_id       = local.tenant_id
+  subscription_id = local.sub_id
   features {}
 }
 
