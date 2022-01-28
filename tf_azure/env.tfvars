@@ -5,6 +5,7 @@ costcenter  = "99999999"
 
 sta_containers  = ["raw", "delta", "landing", "sandbox"]
 sta_replication = "LRS"
+dbw_sku         = "Standard"
 
 region = {
   "short"    = "weu1"

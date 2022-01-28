@@ -16,6 +16,12 @@ variable "openDoor" {
   type        = string
 }
 
+variable "dbw_sku" {
+  description = "Databricks workspace SKU"
+  type        = string
+  default     = "Standard" 
+}
+
 variable "region" {
   description = "Region in which to create the resources, short is used in names and location for location"
   type        = map(string)

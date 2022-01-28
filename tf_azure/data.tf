@@ -11,10 +11,10 @@ data "databricks_group" "admins" {
   depends_on   = [azurerm_databricks_workspace.dbw100]
 }
 
+data "databricks_node_type" "dbc_smallest" {
+  local_disk = true
+}
 
-
-# data "databricks_current_user" "me" {}
-# data "databricks_spark_version" "latest" {}
-# data "databricks_node_type" "smallest" {
-#   local_disk = true
-# }
+data "databricks_spark_version" "dbc_latest_lts" {
+  long_term_support = true
+}
