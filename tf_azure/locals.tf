@@ -40,5 +40,4 @@ locals {
   # KeyVault
   kvt_main = "kvt-${local.name_conv}-100"
 
-  backend_key = "${local.workload}_${local_env_short}.tfstate"
 }
