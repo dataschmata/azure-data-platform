@@ -16,12 +16,19 @@ jobs:
       run:
         shell: bash
         working-directory: "./tf_azure"
+
     steps:
     # Checkout the repository to the GitHub Actions runner
     - uses: actions/checkout@v2
     - uses: hashicorp/setup-terraform@v1
       with: 
         terraform_version: 1.0.0
+      env:
+        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
+        TF_VAR_openDoor: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
 
     - name: 'Terraform Format'
       id: fmt
@@ -31,12 +38,7 @@ jobs:
     - name: 'Terraform Init'
       id: init
       run: terraform init -var-file=env.tfvars
-      with:
-        ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
-        ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-        ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
-        TF_VAR_openDoor: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
+
  
     - name: 'Terraform Validate'
       id: validate
