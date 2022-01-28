@@ -17,6 +17,8 @@ jobs:
       TF_VAR_tf_state_rsg: ${{ secrets.TF_STATE_RSG }}
       TF_VAR_tf_state_sta: ${{ secrets.TF_STATE_STA }}
       TF_VAR_openDoor: ${ARM_CLIENT_SECRET}
+      TF_VAR_tenant_id: ${ARM_TENANT_ID}
+      TF_VAR_subscription_id: ${ARM_SUBSCRIPTION_ID}
     runs-on: ubuntu-latest
  
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest

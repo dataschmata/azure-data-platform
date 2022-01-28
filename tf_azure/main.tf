@@ -24,10 +24,8 @@ terraform {
 
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
-  client_id       = local.client_id
-  client_secret   = var.openDoor
-  tenant_id       = local.tenant_id
-  subscription_id = local.sub_id
+  tenant_id       = var.tenant_id
+  subscription_id = var.subscription_id
   features {}
 }
 
@@ -36,7 +34,7 @@ provider "databricks" {
   azure_workspace_resource_id = azurerm_databricks_workspace.dbw100.id
   azure_client_id             = local.client_id
   azure_client_secret         = var.openDoor
-  azure_tenant_id             = local.tenant_id
+  azure_tenant_id             = var.tenant_id
 }
 
 provider "azuread" {

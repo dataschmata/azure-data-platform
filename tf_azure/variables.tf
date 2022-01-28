@@ -16,6 +16,16 @@ variable "openDoor" {
   type        = string
 }
 
+variable "tenant_id" {
+  description = "Opens the door for databricks provider"
+  type        = string
+}
+
+variable "subscription_id" {
+  description = "Opens the door for databricks provider"
+  type        = string
+}
+
 variable "dbw_sku" {
   description = "Databricks workspace SKU"
   type        = string
