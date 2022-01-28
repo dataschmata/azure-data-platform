@@ -1,7 +1,7 @@
 resource "azurerm_role_assignment" "role100" {
   scope                = azurerm_storage_account.sta100.id
   role_definition_name = "Storage Blob Data Owner"
-  principal_id         = local.client_id
+  principal_id         = local.object_id
 }
 
 resource "azurerm_role_assignment" "role_adm" {
