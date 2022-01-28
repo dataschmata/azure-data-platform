@@ -39,9 +39,7 @@ jobs:
 
     - name: 'Terraform Init'
       id: init
-      run: terraform init -var-file=env.tfvars
-      with:
-        backend-config: "resource_group_name=${TF_VAR_tf_state_rsg}"
+      run: terraform init -var-file=env.tfvars -backend-config="resource_group_name=${TF_VAR_tf_state_rsg}"
  
     - name: 'Terraform Validate'
       id: validate
