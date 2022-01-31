@@ -18,30 +18,28 @@ resource "azuread_user" "usr_adm_dbw" {
 }
 
 resource "azuread_group" "grp_adm" {
-  for_each         = azuread_user.usr_adm
   display_name     = "az-${local.workload}-admin"
   security_enabled = true
   # owners           = [data.azuread_client_config.ad_current.object_id]
 
   members = [
-    each.value.object_id,
+    azuread_user.usr_adm[each.value.object_id],
     /* more users */
   ]
 }
 
 resource "azuread_group" "grp_adm_dbw" {
-  for_each         = azuread_user.usr_adm_dbw
   display_name     = "az-${local.workload}-admin_dbw"
   security_enabled = true
   # owners           = [data.azuread_client_config.ad_current.object_id]
 
   members = [
-    each.value.object_id,
+    azuread_user.usr_adm_dbw[each.value.object_id],
     /* more users */
   ]
 }
 
 resource "azuread_group_member" "sp_adm_dbw" {
-  group_object_id  = azuread_group.grp_adm_dbw.id
+  group_object_id  = azuread_group.grp_adm_dbw[each.value.id]
   member_object_id = local.object_id
 }
