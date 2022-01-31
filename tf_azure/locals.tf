@@ -55,7 +55,7 @@ locals {
   workload  = lower(var.workload)
   name_conv = "${local.workload}-${var.region["short"]}-${local.env_short}"
   name_cosh = "${var.region["short"]}-${local.env_short}"
-  
+
   # ---------------------------------------------------------------------
   # ---------------------------------------------------------------------
 }
