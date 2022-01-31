@@ -16,7 +16,7 @@ resource "databricks_mount" "db_mount" {
   # role for storage account needs to be assigned before mounting
   depends_on = [azuread_group_member.sp_adm_dbw]
 
-  uri = "abfss://${each.key}@${local.sta_main}.dfs.${var.cloud["storageEndpoint"]}"
+  uri = "abfss://${each.key}@${local.sta_main}.dfs.${var.cloud["storageEndpoint"]}/"
   extra_configs = {
     "fs.azure.account.auth.type" : "OAuth",
     "fs.azure.account.oauth.provider.type" : "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider",
