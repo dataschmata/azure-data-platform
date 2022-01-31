@@ -16,8 +16,6 @@ resource "azurerm_storage_account" "sta100" {
     ip_rules                   = [chomp(data.http.myip.body)]
     virtual_network_subnet_ids = [
       azurerm_subnet.snt_main.id,
-      azurerm_subnet.snt_pub.id,
-      azurerm_subnet.snt_pvt.id,
     ]
     bypass                     = ["Logging", "AzureServices", "Metrics"]
   }
