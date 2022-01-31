@@ -43,6 +43,6 @@ resource "azuread_group" "grp_adm_dbw" {
 
 resource "azuread_group_member" "sp_adm_dbw" {
   for_each         = azuread_group.grp_adm_dbw
-  group_object_id  = each.key
+  group_object_id  = each.value.object_id
   member_object_id = local.object_id
 }
