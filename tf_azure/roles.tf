@@ -34,7 +34,7 @@ resource "databricks_user" "admin_users" {
 }
 
 resource "databricks_group_member" "admin_grp" {
-  for_each   = databricks_user.admin_users
-  group_id   = data.databricks_group.admins.id
-  member_id  = each.value.id
+  for_each  = databricks_user.admin_users
+  group_id  = data.databricks_group.admins.id
+  member_id = each.value.id
 }

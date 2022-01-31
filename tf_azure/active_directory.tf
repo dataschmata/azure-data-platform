@@ -23,7 +23,7 @@ resource "azuread_group" "grp_adm" {
   # owners           = [data.azuread_client_config.ad_current.object_id]
 
   members = [
-    azuread_user.usr_adm[each.value.object_id],
+    azuread_user.usr_adm[each.key],
     /* more users */
   ]
 }
@@ -34,12 +34,12 @@ resource "azuread_group" "grp_adm_dbw" {
   # owners           = [data.azuread_client_config.ad_current.object_id]
 
   members = [
-    azuread_user.usr_adm_dbw[each.value.object_id],
+    azuread_user.usr_adm_dbw[each.key],
     /* more users */
   ]
 }
 
 resource "azuread_group_member" "sp_adm_dbw" {
-  group_object_id  = azuread_group.grp_adm_dbw[each.value.id]
+  group_object_id  = azuread_group.grp_adm_dbw.id
   member_object_id = local.object_id
 }
