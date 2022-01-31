@@ -9,7 +9,7 @@ resource "databricks_cluster" "db_cluster_std" {
 
   autoscale {
     min_workers = 1
-    max_workers = 2
+    max_workers = var.dbw_max_workers
   }
 
   azure_attributes {

@@ -22,6 +22,12 @@ variable "dbw_sku" {
   default     = "standard"
 }
 
+variable "dbw_max_workers" {
+  description = "Databricks cluster max_workers autoscale"
+  type        = number
+  default     = 2
+}
+
 variable "region" {
   description = "Region in which to create the resources, short is used in names and location for location"
   type        = map(string)
