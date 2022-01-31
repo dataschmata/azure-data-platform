@@ -1,4 +1,4 @@
-#Create Virtual Network
+#Create Virtual Network and network security group
 resource "azurerm_virtual_network" "vnt_main" {
   name                = local.vnt_main
   address_space       = var.vnt_space
@@ -14,7 +14,7 @@ resource "azurerm_network_security_group" "nsg_main" {
   tags                = local.tags
 }
 
-# rule for github actions runner
+# rule for github actions runner so it can access virtual network
 resource "azurerm_network_security_rule" "nsr100" {
   name                        = "nsr-${local.name_conv}-100"
   priority                    = 100
