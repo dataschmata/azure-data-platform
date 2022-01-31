@@ -5,7 +5,7 @@ costcenter  = "99999999"
 
 sta_containers  = ["raw", "delta", "landing", "sandbox"]
 sta_replication = "LRS"
-dbw_sku         = "standard"
+dbw_sku         = "premium"
 dbw_max_workers = 1
 
 region = {
