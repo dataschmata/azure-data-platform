@@ -4,13 +4,19 @@ resource "azurerm_role_assignment" "role100" {
   principal_id         = local.object_id
 }
 
+resource "azurerm_role_assignment" "role_dbw_adm" {
+  for_each             = azuread_group.grp_adm_dbw
+  scope                = azurerm_storage_account.sta100.id
+  role_definition_name = "Storage Blob Data Contributor"
+  principal_id         = each.value.id
+}
+
 resource "azurerm_role_assignment" "role_adm" {
   for_each             = azuread_group.grp_adm
   scope                = azurerm_resource_group.rsg_main.id
   role_definition_name = "Owner"
   principal_id         = each.value.object_id
 }
-
 
 #########################
 # Databricks roles/users/groups
@@ -20,7 +26,7 @@ resource "azurerm_role_assignment" "role_adm_dbw" {
   for_each             = azuread_group.grp_adm_dbw
   scope                = azurerm_databricks_workspace.dbw100.id
   role_definition_name = "Owner"
-  principal_id         = each.value.object_id
+  principal_id         = each.value.id
 }
 
 resource "databricks_user" "admin_users" {
@@ -30,8 +36,7 @@ resource "databricks_user" "admin_users" {
 }
 
 resource "databricks_group_member" "admin_grp" {
-  for_each   = databricks_user.admin_users
-  group_id   = data.databricks_group.admins.id
-  member_id  = each.value.id
-  depends_on = [azurerm_databricks_workspace.dbw100]
+  for_each  = databricks_user.admin_users
+  group_id  = data.databricks_group.admins.id
+  member_id = each.value.id
 }

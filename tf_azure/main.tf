@@ -16,13 +16,12 @@ terraform {
   }
 
   backend "azurerm" {
-    # rsg and sta expected in -backend-config for terraform init in pipeline
+    # expected in -backend-config for terraform init in pipeline
     container_name = "tfstate"
     key            = "terraform.tfstate"
   }
 }
 
-# Configure the Microsoft Azure Provider
 provider "azurerm" {
   features {}
 }

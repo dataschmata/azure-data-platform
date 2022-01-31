@@ -6,6 +6,7 @@ costcenter  = "99999999"
 sta_containers  = ["raw", "delta", "landing", "sandbox"]
 sta_replication = "LRS"
 dbw_sku         = "standard"
+dbw_max_workers = 1
 
 region = {
   "short"    = "weu1"
@@ -24,10 +25,10 @@ owner = {
 
 addtl_tags = {
   "test1" = "test one"
-  "test2" = "test two"
 }
 
-# pub_space and pvt_sapce for databricks needs to be the same size. used for cluster vms
+# pub_space and pvt_sapce for databricks needs to be the same size. 
+# used for cluster vms
 vnt_space  = ["10.0.0.0/18"]
 snt_prefix = ["10.0.0.0/20"]
 pub_prefix = ["10.0.16.0/20"]

@@ -22,6 +22,12 @@ variable "dbw_sku" {
   default     = "standard"
 }
 
+variable "dbw_max_workers" {
+  description = "Databricks cluster max_workers autoscale"
+  type        = number
+  default     = 2
+}
+
 variable "region" {
   description = "Region in which to create the resources, short is used in names and location for location"
   type        = map(string)
@@ -111,4 +117,29 @@ variable "scope" {
 variable "addtl_tags" {
   description = "additional tags to be used for resources"
   type        = map(string)
+}
+
+
+## Cloud variables
+variable "cloud" {
+  description = "resources defaults to Azure public"
+  type        = map(string)
+  default = {
+    keyvaultDns                    = ".vault.azure.net"
+    mysqlServerEndpoint            = ".mysql.database.azure.com"
+    postgresqlServerEndpoint       = ".postgres.database.azure.com"
+    sqlServerHostname              = ".database.windows.net"
+    storageEndpoint                = "core.windows.net"
+    storageSyncEndpoint            = "afs.azure.net"
+    synapseAnalyticsEndpoint       = ".dev.azuresynapse.net"
+    activeDirectory                = "https://login.microsoftonline.com"
+    activeDirectoryGraphResourceId = "https://graph.windows.net/"
+    activeDirectoryResourceId      = "https://management.core.windows.net/"
+    appInsightsResourceId          = "https://api.applicationinsights.io"
+    logAnalyticsResourceId         = "https://api.loganalytics.io"
+    management                     = "https://management.core.windows.net/"
+    microsoftGraphResourceId       = "https://graph.microsoft.com/"
+    portal                         = "https://portal.azure.com"
+    resourceManager                = "https://management.azure.com/"
+  }
 }
