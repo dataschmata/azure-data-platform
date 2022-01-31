@@ -4,6 +4,7 @@ locals {
   vnt_main = "vnt-${local.name_conv}-100"
   snt_main = "snt-${local.name_conv}-100"
   nsg_main = "nsg-${local.name_conv}-100"
+  sta_main = replace("sta${local.name_conv}100", "-", "")
 
 
   # set up for databricks with resource group and storage account names
