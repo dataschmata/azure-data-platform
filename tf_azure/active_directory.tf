@@ -24,7 +24,7 @@ resource "azuread_group" "grp_adm" {
   # owners           = [data.azuread_client_config.ad_current.object_id]
 
   members = [
-    [each.value.object_id],
+    each.value.object_id,
     /* more users */
   ]
 }
@@ -36,7 +36,7 @@ resource "azuread_group" "grp_adm_dbw" {
   # owners           = [data.azuread_client_config.ad_current.object_id]
 
   members = [
-    [each.value.object_id],
+    each.value.object_id,
     /* more users */
   ]
 }
