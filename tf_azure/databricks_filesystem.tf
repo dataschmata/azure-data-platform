@@ -11,6 +11,8 @@ resource "databricks_secret" "secret" {
 
 resource "databricks_mount" "db_mount" {
   for_each   = toset(var.sta_containers)
+  # role for storgae account needs to be assigned before mounting
+  depends_on = [azuread_group_member.sp_adm_dbw]
   name       = each.key
   cluster_id = databricks_cluster.db_cluster_sgl.id
 
