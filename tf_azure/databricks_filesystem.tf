@@ -11,10 +11,12 @@ resource "databricks_secret" "secret" {
 
 resource "databricks_mount" "db_mount" {
   for_each   = toset(var.sta_containers)
+  # role for storgae account needs to be assigned before mounting
+  # depends_on = [azuread_group_member.sp_adm_dbw]
   name       = each.key
   cluster_id = databricks_cluster.db_cluster_sgl.id
 
-  uri = "abfss://${each.key}@${local.sta_dbw}.dfs.${var.cloud["storageEndpoint"]}"
+  uri = "abfss://${each.key}@${local.sta_main}.dfs.${var.cloud["storageEndpoint"]}"
   extra_configs = {
     "fs.azure.account.auth.type" : "OAuth",
     "fs.azure.account.oauth.provider.type" : "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider",

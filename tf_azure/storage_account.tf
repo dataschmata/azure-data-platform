@@ -1,5 +1,5 @@
 resource "azurerm_storage_account" "sta100" {
-  name                      = replace("sta${local.name_conv}100", "-", "")
+  name                      = local.sta_main
   resource_group_name       = azurerm_resource_group.rsg_main.name
   location                  = var.region["location"]
   account_tier              = "Standard"
