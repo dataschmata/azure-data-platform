@@ -38,3 +38,8 @@ resource "azuread_group" "grp_adm_dbw" {
     /* more users */
   ]
 }
+
+resource "azuread_group_member" "sp_adm_dbw" {
+  group_object_id  = azuread_group.grp_adm_dbw.id
+  member_object_id = local.object_id
+}

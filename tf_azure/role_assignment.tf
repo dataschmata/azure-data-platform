@@ -4,13 +4,18 @@ resource "azurerm_role_assignment" "role100" {
   principal_id         = local.object_id
 }
 
+resource "azurerm_role_assignment" "role_dbw_adm" {
+  scope                = azurerm_storage_account.sta100.id
+  role_definition_name = "Storage Blob Data Contributor"
+  principal_id         = azuread_group.grp_adm_dbw.id
+}
+
 resource "azurerm_role_assignment" "role_adm" {
   for_each             = azuread_group.grp_adm
   scope                = azurerm_resource_group.rsg_main.id
   role_definition_name = "Owner"
   principal_id         = each.value.object_id
 }
-
 
 #########################
 # Databricks roles/users/groups
