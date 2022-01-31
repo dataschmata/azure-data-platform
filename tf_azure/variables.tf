@@ -29,7 +29,7 @@ variable "dbw_max_workers" {
 }
 
 variable "region" {
-  description = "Region in which to create the resources, short is used in names and location for location"
+  description = "Region in which to create the resources"
   type        = map(string)
   default = {
     "short"    = "weu1"
@@ -56,19 +56,19 @@ variable "snt_prefix" {
 }
 
 variable "pub_prefix" {
-  description = "the address space of the public subnet for databricks"
+  description = "address space of public subnet for databricks"
   type        = list(string)
   default     = ["10.0.16.0/20"]
 }
 
 variable "pvt_prefix" {
-  description = "the address space of the privat subnet for databricks"
+  description = "address space of privat subnet for databricks"
   type        = list(string)
   default     = ["10.0.32.0/20"]
 }
 
 variable "sta_replication" {
-  description = "Defines the type of replication to use for this storage account."
+  description = "Defines type of replication for storage account."
   type        = string
   default     = "LRS"
 }
