@@ -1,4 +1,5 @@
-# used due to issue https://github.com/hashicorp/terraform-provider-azurerm/issues/2977
+# used due to issue 
+# https://github.com/hashicorp/terraform-provider-azurerm/issues/2977
 
 resource "azurerm_resource_group_template_deployment" "sct100" {
   for_each            = toset(var.sta_containers)
