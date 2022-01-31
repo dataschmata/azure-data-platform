@@ -1,6 +1,6 @@
 output "dbw_url" {
   description = "The URL of the Databricks workspace"
-  value       = data.azurerm_databricks_workspace.dbw100.workspace_url
+  value       = azurerm_databricks_workspace.dbw100.workspace_url
 }
 
 # output "global_settings" {
