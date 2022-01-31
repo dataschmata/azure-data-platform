@@ -42,6 +42,7 @@ resource "azuread_group" "grp_adm_dbw" {
 }
 
 resource "azuread_group_member" "sp_adm_dbw" {
-  group_object_id  = azuread_group.grp_adm_dbw.id
+  for_each         = azuread_group.grp_adm_dbw
+  group_object_id  = each.key
   member_object_id = local.object_id
 }
