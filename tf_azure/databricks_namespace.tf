@@ -5,6 +5,13 @@ resource "azurerm_databricks_workspace" "dbw100" {
   managed_resource_group_name = local.rsg_dbw
   sku                         = var.dbw_sku
   tags                        = local.tags
+
+  # adding depends_on as had "does not exist" issue's in the past when
+  # deploying fesh 
+  depends_on = [
+    azurerm_virtual_network.vnt_main,
+  ]
+  
   custom_parameters {
     no_public_ip             = true
     virtual_network_id       = azurerm_virtual_network.vnt_main.id
