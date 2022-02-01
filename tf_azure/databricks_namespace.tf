@@ -11,7 +11,7 @@ resource "azurerm_databricks_workspace" "dbw100" {
   depends_on = [
     azurerm_virtual_network.vnt_main,
   ]
-  
+
   custom_parameters {
     no_public_ip             = true
     virtual_network_id       = azurerm_virtual_network.vnt_main.id
