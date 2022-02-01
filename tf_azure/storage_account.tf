@@ -12,12 +12,12 @@ resource "azurerm_storage_account" "sta100" {
   min_tls_version           = "TLS1_2"
   tags                      = local.tags
   network_rules {
-    default_action             = "Deny"
-    ip_rules                   = [chomp(data.http.myip.body)]
+    default_action = "Deny"
+    ip_rules       = [chomp(data.http.myip.body)]
+    bypass         = ["Logging", "AzureServices", "Metrics"]
     virtual_network_subnet_ids = [
       azurerm_subnet.snt_main.id,
     ]
-    bypass                     = ["Logging", "AzureServices", "Metrics"]
   }
 }
 
