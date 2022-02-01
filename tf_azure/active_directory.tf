@@ -11,16 +11,15 @@ resource "azuread_user" "usr_adm" {
 resource "azuread_application" "app_dbw" {
   display_name            = "az-${local.workload}-databricks"
   sign_in_audience        = "AzureADMyOrg"
-
-  feature_tags {
-    enterprise = true
-  }
 }
 
 resource "azuread_application_password" "app_dbw_sec" {
   application_object_id = azuread_application.app_dbw.object_id
   display_name          = "az-${local.workload}-databricks-terraform"
-  end_date_relative     = "4400h"
+}
+
+resource "azuread_service_principal" "app_sp_dbw" {
+  application_id = azuread_application.app_dbw.application_id
 }
 
 # admin/owners of the databricks namespace
