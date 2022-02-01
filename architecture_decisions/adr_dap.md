@@ -1,8 +1,8 @@
-# [short title of solved problem and solution]
+# ADR for Data Aggregation Platform (DAP) as part of Novacom 2
 
-* Status: [proposed | rejected | accepted | deprecated | … | superseded by [ADR-0005](0005-example.md)] <!-- optional -->
-* Deciders: [list everyone involved in the decision] <!-- optional -->
-* Date: [YYYY-MM-DD when the decision was last updated] <!-- optional -->
+* Status: proposed <!-- optional ...  superseded by [ADR-0005](0005-example.md)]-->
+* Deciders: Dennis Rossberg <!-- optional -->
+* Date: 1st February 2022 <!-- optional -->
 
 Technical Story: [description | ticket/issue URL] <!-- optional -->
 
