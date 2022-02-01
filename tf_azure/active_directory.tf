@@ -14,9 +14,9 @@ resource "azuread_application" "app_dbw" {
   prevent_duplicate_names = true
   sign_in_audience        = "AzureADMyOrg"
 
-  # feature_tags {
-  #   enterprise = true
-  # }
+  feature_tags {
+    enterprise = true
+  }
 }
 
 resource "azuread_application_password" "app_dbw_sec" {
