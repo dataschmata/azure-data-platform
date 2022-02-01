@@ -15,7 +15,7 @@ resource "azuread_application" "app_dbw" {
 
 resource "azuread_application_password" "app_dbw_sec" {
   application_object_id = azuread_application.app_dbw.object_id
-  display_name          = "az-${local.workload}-databricks-terraform"
+  display_name          = "${local.workload}-terraform"
 }
 
 resource "azuread_service_principal" "app_sp_dbw" {
