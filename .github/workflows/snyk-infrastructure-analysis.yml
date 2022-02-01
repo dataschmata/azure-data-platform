@@ -12,7 +12,9 @@
 
 name: Snyk Infrastructure as Code
 
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
+  workflow_call:
 # on:
 #   push:
 #     branches: [ main ]
