@@ -5,7 +5,7 @@ resource "databricks_secret_scope" "secret_scope" {
 
 resource "databricks_secret" "secret" {
   key          = "terraform_secret"
-  string_value = var.openDoor
+  string_value = azuread_application_password.app_dbw_sec.value
   scope        = databricks_secret_scope.secret_scope.name
 }
 
@@ -14,13 +14,13 @@ resource "databricks_mount" "db_mount" {
   name       = each.key
   cluster_id = databricks_cluster.db_cluster_sgl.id
   # role for storage account needs to be assigned before mounting
-  depends_on = [azuread_group_member.sp_adm_dbw]
+  depends_on = [azurerm_role_assignment.role_dbw]
 
   uri = "abfss://${each.key}@${local.sta_main}.dfs.${var.cloud["storageEndpoint"]}/"
   extra_configs = {
     "fs.azure.account.auth.type" : "OAuth",
     "fs.azure.account.oauth.provider.type" : "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider",
-    "fs.azure.account.oauth2.client.id" : local.client_id,
+    "fs.azure.account.oauth2.client.id" : azuread_application.app_dbw.client_id,
     "fs.azure.account.oauth2.client.secret" : "{{secrets/terraform/terraform_secret}}",
     "fs.azure.account.oauth2.client.endpoint" : "${var.cloud["activeDirectory"]}/${local.tenant_id}/oauth2/token",
     "fs.azure.createRemoteFileSystemDuringInitialization" : "false",

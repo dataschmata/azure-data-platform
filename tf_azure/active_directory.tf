@@ -8,6 +8,23 @@ resource "azuread_user" "usr_adm" {
   # owners              = [data.azuread_client_config.ad_current.object_id]
 }
 
+resource "azuread_application" "app_dbw" {
+  display_name            = "az-${local.workload}-databricks"
+  owners                  = [data.azuread_client_config.cfg.object_id]
+  prevent_duplicate_names = true
+  sign_in_audience        = "AzureADMyOrg"
+
+  # feature_tags {
+  #   enterprise = true
+  # }
+}
+
+resource "azuread_application_password" "app_dbw_sec" {
+  application_object_id = azuread_application.app_dbw.object_id
+  display_name          = "az-${local.workload}-databricks-terraform"
+  end_date_relative     = "4400h"
+}
+
 # admin/owners of the databricks namespace
 resource "azuread_user" "usr_adm_dbw" {
   for_each            = toset(var.admin_dbw_email)
@@ -39,10 +56,4 @@ resource "azuread_group" "grp_adm_dbw" {
     each.value.object_id,
     /* more users */
   ]
-}
-
-resource "azuread_group_member" "sp_adm_dbw" {
-  for_each         = azuread_group.grp_adm_dbw
-  group_object_id  = each.value.object_id
-  member_object_id = local.object_id
 }
