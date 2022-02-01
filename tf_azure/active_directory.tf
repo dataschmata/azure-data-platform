@@ -10,7 +10,6 @@ resource "azuread_user" "usr_adm" {
 
 resource "azuread_application" "app_dbw" {
   display_name            = "az-${local.workload}-databricks"
-  owners                  = [data.azuread_client_config.ad_current.object_id]
   prevent_duplicate_names = true
   sign_in_audience        = "AzureADMyOrg"
 
