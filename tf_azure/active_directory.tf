@@ -9,8 +9,8 @@ resource "azuread_user" "usr_adm" {
 }
 
 resource "azuread_application" "app_dbw" {
-  display_name            = "az-${local.workload}-databricks"
-  sign_in_audience        = "AzureADMyOrg"
+  display_name     = "az-${local.workload}-databricks"
+  sign_in_audience = "AzureADMyOrg"
 }
 
 resource "azuread_application_password" "app_dbw_sec" {
