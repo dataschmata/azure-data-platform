@@ -6,7 +6,13 @@ on:
     branches:
     - main_azure
  
+
+
 jobs:
+  snyk:
+    name: 'snyk'
+    uses: ./.github/workflows/snyk-infrastructure-analysis.yml
+
   terraform:
     name: 'Terraform'
     env:
