@@ -33,4 +33,5 @@ provider "databricks" {
 
 provider "azuread" {
   # Configuration options
+  tenant_id = local.tenant_id
 }
