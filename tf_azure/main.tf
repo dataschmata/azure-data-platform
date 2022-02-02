@@ -13,6 +13,10 @@ terraform {
       source  = "databrickslabs/databricks"
       version = "0.4.7"
     }
+    random = {
+      source  = "hashicorp/random"
+      version = "3.1.0"
+    }
   }
 
   backend "azurerm" {
@@ -23,7 +27,11 @@ terraform {
 }
 
 provider "azurerm" {
-  features {}
+  features {
+    key_vault {
+      purge_soft_delete_on_destroy = true
+    }
+  }
 }
 
 provider "databricks" {
@@ -34,4 +42,8 @@ provider "databricks" {
 provider "azuread" {
   # Configuration options
   tenant_id = local.tenant_id
+}
+
+provider "random" {
+  # Configuration options
 }
