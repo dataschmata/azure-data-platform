@@ -2,11 +2,15 @@ name: 'Terraform Azure'
  
 on: 
   workflow_dispatch:
-  push:
+  pull_request:
     branches:
     - main
  
 jobs:
+  snyk:
+    name: 'snyk'
+    uses: ./.github/workflows/snyk_analysis.yml
+
   terraform:
     name: 'Terraform'
     env:

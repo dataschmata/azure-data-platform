@@ -7,10 +7,6 @@ on:
     - main_azure
 
 jobs:
-  snyk:
-    name: 'snyk'
-    uses: ./.github/workflows/snyk_analysis.yml
-
   terraform:
     name: 'Terraform'
     env:
