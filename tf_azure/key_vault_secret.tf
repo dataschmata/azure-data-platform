@@ -1,5 +1,5 @@
 resource "azurerm_key_vault_secret" "kvt_sec_sp" {
-  name         = "sec_${azuread_service_principal.sp_dbw.display_name}"
+  name         = "sec-sp"
   value        = azuread_service_principal_password.sp_dbw_sec.value
   key_vault_id = azurerm_key_vault.kvt_main.id
 }
