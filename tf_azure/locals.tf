@@ -57,6 +57,9 @@ locals {
   name_conv = "${local.workload}-${var.region["short"]}-${local.env_short}"
   name_cosh = "${var.region["short"]}-${local.env_short}"
 
+  tf_secret_scope = azuread_service_principal.sp_dbw.display_name
+  tf_secret       = "${local.tf_secret_scope}_secret"
+
   # ---------------------------------------------------------------------
   # ---------------------------------------------------------------------
 }
