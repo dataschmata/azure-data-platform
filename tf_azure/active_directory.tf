@@ -13,17 +13,18 @@ resource "azuread_application" "app_dbw" {
   sign_in_audience = "AzureADMyOrg"
 }
 
-resource "azuread_application_password" "app_dbw_sec" {
-  application_object_id = azuread_application.app_dbw.object_id
-  display_name          = "${local.workload}-terraform"
-}
-
-resource "azuread_service_principal" "app_sp_dbw" {
+resource "azuread_service_principal" "sp_dbw" {
   application_id = azuread_application.app_dbw.application_id
   feature_tags {
     enterprise = true
   }
 }
+
+resource "azuread_service_principal_password" "sp_dbw_sec" {
+  service_principal_id = azuread_service_principal.sp_dbw.object_id
+  display_name         = "${local.workload}-terraform"
+}
+
 
 # admin/owners of the databricks namespace
 resource "azuread_user" "usr_adm_dbw" {

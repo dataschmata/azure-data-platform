@@ -5,7 +5,7 @@ resource "databricks_secret_scope" "secret_scope" {
 
 resource "databricks_secret" "secret" {
   key          = "terraform_secret"
-  string_value = azuread_application_password.app_dbw_sec.value
+  string_value = azuread_service_principal_password.sp_dbw_sec.value
   scope        = databricks_secret_scope.secret_scope.name
 }
 
@@ -20,7 +20,7 @@ resource "databricks_mount" "db_mount" {
   extra_configs = {
     "fs.azure.account.auth.type" : "OAuth",
     "fs.azure.account.oauth.provider.type" : "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider",
-    "fs.azure.account.oauth2.client.id" : azuread_application.app_dbw.application_id,
+    "fs.azure.account.oauth2.client.id" : azuread_service_principal.sp_dbw.application_id,
     "fs.azure.account.oauth2.client.secret" : "{{secrets/terraform/terraform_secret}}",
     "fs.azure.account.oauth2.client.endpoint" : "${var.cloud["activeDirectory"]}/${local.tenant_id}/oauth2/token",
     "fs.azure.createRemoteFileSystemDuringInitialization" : "false",
