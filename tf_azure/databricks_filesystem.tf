@@ -8,7 +8,7 @@ resource "databricks_mount" "db_mount" {
   depends_on = [
     azurerm_role_assignment.role_dbw_adm,
     azuread_service_principal_password.sp_dbw_sec,
-    ]
+  ]
 
   uri = "abfss://${each.key}@${local.sta_main}.dfs.${var.cloud["storageEndpoint"]}/"
   extra_configs = {
