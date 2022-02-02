@@ -14,7 +14,7 @@ resource "databricks_mount" "db_mount" {
   name       = each.key
   cluster_id = databricks_cluster.db_cluster_sgl.id
   # role for storage account needs to be assigned before mounting
-  depends_on = [azurerm_role_assignment.role_dbw]
+  depends_on = [azurerm_role_assignment.role_dbw_adm]
 
   uri = "abfss://${each.key}@${local.sta_main}.dfs.${var.cloud["storageEndpoint"]}/"
   extra_configs = {
