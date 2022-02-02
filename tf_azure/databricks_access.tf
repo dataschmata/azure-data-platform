@@ -15,8 +15,8 @@ resource "databricks_secret" "secret" {
 
 # users and groups
 resource "databricks_user" "admin_users" {
-  for_each   = azuread_group.grp_adm_dbw
-  user_name  = each.key
+  for_each   = azuread_user.usr_adm_dbw
+  user_name  = each.value.user_principal_name
   depends_on = [azurerm_databricks_workspace.dbw100]
 }
 
