@@ -13,7 +13,7 @@ resource "azurerm_key_vault" "kvt_main" {
   network_acls {
     default_action = "Deny"
     ip_rules       = [chomp(data.http.myip.body)]
-    bypass         = ["AzureServices"]
+    bypass         = "AzureServices"
     virtual_network_subnet_ids = [
       azurerm_subnet.snt_main.id,
     ]
