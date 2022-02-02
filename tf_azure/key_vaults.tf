@@ -9,7 +9,7 @@ resource "azurerm_key_vault" "kvt_main" {
   enable_rbac_authorization   = true
   tags                        = local.tags
   sku_name                    = "standard"
-  
+
   network_acls {
     default_action = "Deny"
     ip_rules       = [chomp(data.http.myip.body)]
