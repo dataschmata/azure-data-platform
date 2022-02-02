@@ -57,12 +57,15 @@ resource "azuread_group_member" "mem_adm_dbwsp" {
 resource "azuread_application" "app_dbw" {
   display_name     = "az-${local.workload}-databricks"
   sign_in_audience = "AzureADMyOrg"
+  feature_tags {
+    hide       = true
+  }
 }
 
 resource "azuread_service_principal" "sp_dbw" {
   application_id = azuread_application.app_dbw.application_id
   feature_tags {
-    enterprise = true
+    hide       = true
   }
 }
 
