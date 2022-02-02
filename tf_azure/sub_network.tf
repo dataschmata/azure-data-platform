@@ -4,7 +4,11 @@ resource "azurerm_subnet" "snt_main" {
   resource_group_name  = azurerm_resource_group.rsg_main.name
   virtual_network_name = azurerm_virtual_network.vnt_main.name
   address_prefixes     = var.snt_prefix
-  service_endpoints    = ["Microsoft.Storage", "Microsoft.EventHub","Microsoft.KeyVault"]
+  service_endpoints    = [
+    "Microsoft.Storage", 
+    "Microsoft.EventHub",
+    "Microsoft.KeyVault"
+  ]
 }
 
 resource "azurerm_subnet_network_security_group_association" "nsga100" {
