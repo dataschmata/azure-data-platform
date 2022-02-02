@@ -58,8 +58,8 @@ locals {
   name_cosh = "${var.region["short"]}-${local.env_short}"
 
   tf_secret_scope = azuread_service_principal.sp_dbw.display_name
-  tf_secret       = "${tf_secret_scope}_secret"
-  
+  tf_secret       = "${local.tf_secret_scope}_secret"
+
   # ---------------------------------------------------------------------
   # ---------------------------------------------------------------------
 }
