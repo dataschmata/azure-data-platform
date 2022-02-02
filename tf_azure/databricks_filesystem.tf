@@ -1,20 +1,14 @@
-resource "databricks_secret_scope" "secret_scope" {
-  name                     = "terraform"
-  initial_manage_principal = "users"
-}
-
-resource "databricks_secret" "secret" {
-  key          = "terraform_secret"
-  string_value = azuread_service_principal_password.sp_dbw_sec.value
-  scope        = databricks_secret_scope.secret_scope.name
-}
 
 resource "databricks_mount" "db_mount" {
   for_each   = toset(var.sta_containers)
   name       = each.key
   cluster_id = databricks_cluster.db_cluster_sgl.id
-  # role for storage account needs to be assigned before mounting
-  depends_on = [azurerm_role_assignment.role_dbw_adm]
+  # role for storage account and service principal needs to be fully
+  # created before mounting
+  depends_on = [
+    azurerm_role_assignment.role_dbw_adm,
+    azuread_service_principal_password.sp_dbw_sec,
+    ]
 
   uri = "abfss://${each.key}@${local.sta_main}.dfs.${var.cloud["storageEndpoint"]}/"
   extra_configs = {
