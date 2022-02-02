@@ -6,9 +6,9 @@ resource "azurerm_subnet" "snt_main" {
   address_prefixes     = var.snt_prefix
 
   service_endpoints = [
-    "Microsoft.Storage", 
+    "Microsoft.Storage",
     "Microsoft.EventHub",
-    "Microsoft.KeyVault"
+    "Microsoft.KeyVault",
   ]
 }
 
