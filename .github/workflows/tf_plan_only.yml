@@ -5,13 +5,11 @@ on:
   push:
     branches:
     - main_azure
- 
-
 
 jobs:
   snyk:
     name: 'snyk'
-    uses: ./.github/workflows/snyk-infrastructure-analysis.yml
+    uses: ./.github/workflows/snyk_analysis.yml
 
   terraform:
     name: 'Terraform'
