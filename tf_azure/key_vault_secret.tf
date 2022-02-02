@@ -5,21 +5,21 @@ resource "azurerm_key_vault_secret" "kvt_sec_sp" {
 }
 
 resource "azurerm_key_vault_secret" "kvt_sec_adm" {
-  name         = "sec_az-admin"
+  name         = "sec-az-admin"
   value        = random_password.password.result
   key_vault_id = azurerm_key_vault.kvt_main.id
 }
 
 resource "azurerm_key_vault_secret" "kvt_sec_adm_dbw" {
-  name         = "sec_az-admin-dbw"
+  name         = "sec-az-admin-dbw"
   value        = random_password.password.result
   key_vault_id = azurerm_key_vault.kvt_main.id
 }
 
 resource "random_password" "password" {
- #  keepers = {
- #    ami_id = "${var.ami_id}"
- #  }
+  #  keepers = {
+  #    ami_id = "${var.ami_id}"
+  #  }
   length      = 30
   upper       = true
   lower       = true
