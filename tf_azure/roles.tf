@@ -18,11 +18,6 @@ resource "azurerm_role_assignment" "role_adm" {
   principal_id         = each.value.object_id
 }
 
-resource "azurerm_role_assignment" "role_dbw" {
-  scope                = azurerm_storage_account.sta100.id
-  role_definition_name = "Storage Blob Data Owner"
-  principal_id         = azuread_service_principal.sp_dbw.object_id
-}
 
 
 #########################
