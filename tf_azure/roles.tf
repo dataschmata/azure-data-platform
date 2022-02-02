@@ -5,10 +5,9 @@ resource "azurerm_role_assignment" "role100" {
 }
 
 resource "azurerm_role_assignment" "role_dbw_adm" {
-  for_each             = azuread_group.grp_adm_dbw
   scope                = azurerm_storage_account.sta100.id
   role_definition_name = "Storage Blob Data Owner"
-  principal_id         = each.value.object_id
+  principal_id         = azuread_group.grp_adm_dbw.object_id
 }
 
 resource "azurerm_role_assignment" "role_adm" {
