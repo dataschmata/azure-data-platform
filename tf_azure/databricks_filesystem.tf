@@ -15,7 +15,7 @@ resource "databricks_mount" "db_mount" {
     "fs.azure.account.auth.type" : "OAuth",
     "fs.azure.account.oauth.provider.type" : "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider",
     "fs.azure.account.oauth2.client.id" : azuread_service_principal.sp_dbw.application_id,
-    "fs.azure.account.oauth2.client.secret" : "{{secrets/terraform/terraform_secret}}",
+    "fs.azure.account.oauth2.client.secret" : "{{secrets/${local.tf_secret_scope}/${local.tf_secret}}}",
     "fs.azure.account.oauth2.client.endpoint" : "${var.cloud["activeDirectory"]}/${local.tenant_id}/oauth2/token",
     "fs.azure.createRemoteFileSystemDuringInitialization" : "false",
   }

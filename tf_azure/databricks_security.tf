@@ -1,12 +1,12 @@
 # secret for service principal
 resource "databricks_secret_scope" "secret_scope" {
-  name                     = azuread_service_principal.sp_dbw.display_name
+  name                     = local.tf_secret_scope
   initial_manage_principal = "users"
   depends_on               = [azurerm_databricks_workspace.dbw100]
 }
 
 resource "databricks_secret" "secret" {
-  key          = "terraform_secret"
+  key          = local.tf_secret
   string_value = azuread_service_principal_password.sp_dbw_sec.value
   scope        = databricks_secret_scope.secret_scope.name
   depends_on   = [azurerm_databricks_workspace.dbw100]
