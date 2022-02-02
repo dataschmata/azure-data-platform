@@ -20,6 +20,9 @@ resource "azuread_application_password" "app_dbw_sec" {
 
 resource "azuread_service_principal" "app_sp_dbw" {
   application_id = azuread_application.app_dbw.application_id
+  feature_tags {
+    enterprise = true
+  }
 }
 
 # admin/owners of the databricks namespace
