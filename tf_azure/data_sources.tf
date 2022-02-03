@@ -45,8 +45,3 @@ data "azuread_users" "usr_adm" {
   user_principal_names = var.admin_email
   depends_on           = [azuread_user.aad_usr]
 }
-
-data "azuread_users" "usr_usr" {
-  user_principal_names = var.user_email
-  depends_on           = [azuread_user.aad_usr]
-}
