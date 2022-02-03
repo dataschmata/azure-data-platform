@@ -58,7 +58,7 @@ resource "azuread_group" "grp_usr_dbw" {
 }
 
 resource "azuread_group_member" "mem_usr_dbw" {
-  count            = length(ata.azuread_users.usr_usr_dbw.object_ids)
+  count            = length(data.azuread_users.usr_usr_dbw.object_ids)
   group_object_id  = azuread_group.grp_usr_dbw.id
   member_object_id = data.azuread_users.usr_usr_dbw.object_ids[count.index]
 }
