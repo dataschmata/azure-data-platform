@@ -33,7 +33,7 @@ locals {
   object_id = data.azurerm_client_config.cfg.object_id
 
   # merging list of all users to be created in AAD
-  aad_users = merge(
+  aad_users = concat(
     var.admin_email,
     var.admin_dbw_email,
     var.user_email,
