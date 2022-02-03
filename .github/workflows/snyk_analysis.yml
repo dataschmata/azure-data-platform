@@ -14,10 +14,10 @@ name: Snyk Infrastructure as Code
 
 on: 
   workflow_dispatch:
-  workflow_call:
-  pull_request:
-    branches:
-    - main
+  # workflow_call:
+  # pull_request:
+  #   branches:
+  #   - main
 
 #   schedule:
 #     - cron: '16 21 * * 5'
