@@ -36,8 +36,7 @@ locals {
   aad_users = concat(
     var.admin_email,
     var.admin_dbw_email,
-    var.user_email,
-    var.user_dbw_email,
+    var.user_dbw_email
   )
 
   # concat list of all users to be created in Databricks

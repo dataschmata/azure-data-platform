@@ -17,22 +17,22 @@ resource "azuread_group" "grp_adm" {
 }
 
 resource "azuread_group_member" "mem_adm" {
-  for_each         = toset(data.azuread_users.usr_usr.object_ids)
+  count            = length(data.azuread_users.usr_adm.object_ids)
   group_object_id  = azuread_group.grp_adm.id
-  member_object_id = each.key
+  member_object_id = data.azuread_users.usr_adm.object_ids[count.index]
 }
 
-# users
-resource "azuread_group" "grp_usr" {
-  display_name     = "az-${local.workload}-user"
-  security_enabled = true
-}
+# # users
+# resource "azuread_group" "grp_usr" {
+#   display_name     = "az-${local.workload}-user"
+#   security_enabled = true
+# }
 
-resource "azuread_group_member" "mem_usr" {
-  for_each         = toset(data.azuread_users.usr_usr.object_ids)
-  group_object_id  = azuread_group.grp_usr.id
-  member_object_id = each.key
-}
+# resource "azuread_group_member" "mem_usr" {
+#   count            = length(data.azuread_users.usr_usr.object_ids)
+#   group_object_id  = azuread_group.grp_usr.id
+#   member_object_id = data.azuread_users.usr_usr.object_ids[count.index]
+# }
 
 
 ##########################
@@ -46,9 +46,9 @@ resource "azuread_group" "grp_adm_dbw" {
 }
 
 resource "azuread_group_member" "mem_adm_dbw" {
-  for_each         = toset(data.azuread_users.usr_adm_dbw.object_ids)
+  count            = length(data.azuread_users.usr_adm_dbw.object_ids)
   group_object_id  = azuread_group.grp_adm_dbw.id
-  member_object_id = each.key
+  member_object_id = data.azuread_users.usr_adm_dbw.object_ids[count.index]
 }
 
 #users
@@ -58,9 +58,9 @@ resource "azuread_group" "grp_usr_dbw" {
 }
 
 resource "azuread_group_member" "mem_usr_dbw" {
-  for_each         = toset(data.azuread_users.usr_usr_dbw.object_ids)
+  count            = length(ata.azuread_users.usr_usr_dbw.object_ids)
   group_object_id  = azuread_group.grp_usr_dbw.id
-  member_object_id = each.key
+  member_object_id = data.azuread_users.usr_usr_dbw.object_ids[count.index]
 }
 
 # service principal for databricks

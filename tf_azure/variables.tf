@@ -12,19 +12,9 @@ variable "admin_dbw_email" {
   type        = list(string)
 }
 
-variable "user_email" {
-  description = "email address list of users of platform"
-  type        = list(string)
-}
-
 variable "user_dbw_email" {
   description = "email address list of users of databricks"
   type        = list(string)
-}
-
-variable "openDoor" {
-  description = "Opens the door for databricks provider"
-  type        = string
 }
 
 
@@ -169,4 +159,10 @@ variable "cloud" {
     portal                         = "https://portal.azure.com"
     resourceManager                = "https://management.azure.com/"
   }
+}
+
+######################
+variable "openDoor" {
+  description = "Opens the door for databricks provider"
+  type        = string
 }

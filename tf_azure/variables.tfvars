@@ -3,7 +3,6 @@
 ##################################
 
 admin_email     = ["admin@dataschmata.com"]
-user_email      = ["user@dataschmata.com"]
 admin_dbw_email = ["dbw_admin@dataschmata.com"]
 user_dbw_email  = ["dbw_user@dataschmata.com"]
 
