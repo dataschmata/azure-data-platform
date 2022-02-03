@@ -17,7 +17,7 @@ resource "azuread_group" "grp_adm" {
 }
 
 resource "azuread_group_member" "mem_adm" {
-  count            = length(data.azuread_users.usr_adm.object_ids)
+  count            = length(var.usr_adm)
   group_object_id  = azuread_group.grp_adm.id
   member_object_id = data.azuread_users.usr_adm.object_ids[count.index]
 }
@@ -46,7 +46,7 @@ resource "azuread_group" "grp_adm_dbw" {
 }
 
 resource "azuread_group_member" "mem_adm_dbw" {
-  count            = length(data.azuread_users.usr_adm_dbw.object_ids)
+  count            = length(var.usr_adm_dbw)
   group_object_id  = azuread_group.grp_adm_dbw.id
   member_object_id = data.azuread_users.usr_adm_dbw.object_ids[count.index]
 }
@@ -58,7 +58,7 @@ resource "azuread_group" "grp_usr_dbw" {
 }
 
 resource "azuread_group_member" "mem_usr_dbw" {
-  count            = length(data.azuread_users.usr_usr_dbw.object_ids)
+  count            = length(var.usr_usr_dbw)
   group_object_id  = azuread_group.grp_usr_dbw.id
   member_object_id = data.azuread_users.usr_usr_dbw.object_ids[count.index]
 }
