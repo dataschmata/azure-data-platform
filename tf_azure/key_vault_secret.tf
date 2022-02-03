@@ -2,6 +2,8 @@ resource "azurerm_key_vault_secret" "kvt_sec_sp" {
   name         = "sec-sp"
   value        = azuread_service_principal_password.sp_dbw_sec.value
   key_vault_id = azurerm_key_vault.kvt_main.id
+  depends_on   = [azurerm_role_assignment.role_kvt_sec]
+  # await role assignment
 }
 
 # resource "azurerm_key_vault_secret" "kvt_sec_adm" {
