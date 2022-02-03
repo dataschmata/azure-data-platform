@@ -36,7 +36,7 @@ resource "azurerm_role_assignment" "role_kvt_sec" {
   principal_id         = azuread_group.grp_adm.object_id
 }
 
-resource "azurerm_role_assignment" "role_kvt_sec" {
+resource "azurerm_role_assignment" "role_kvt_sec_sp" {
   scope                = azurerm_key_vault.kvt_main.id
   role_definition_name = "Key Vault Secrets Officer"
   principal_id         = local.object_id
