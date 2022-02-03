@@ -1,4 +1,4 @@
-
+## mounting all file systems from the data lake in databricks
 # resource "databricks_mount" "db_mount" {
 #   for_each   = toset(var.sta_containers)
 #   name       = each.key
