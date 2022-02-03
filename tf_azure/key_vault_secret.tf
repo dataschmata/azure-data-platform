@@ -17,7 +17,7 @@ resource "azurerm_key_vault_secret" "kvt_sec_sp" {
 # }
 
 resource "random_password" "password" {
-  for_each = local.aad_users
+  for_each = toset(local.aad_users)
 
   keepers = {
     "aad_user" = "${each.key}"

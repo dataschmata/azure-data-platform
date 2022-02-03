@@ -14,9 +14,11 @@ resource "databricks_secret" "secret" {
 
 # adding users to databricks workspace
 resource "databricks_user" "users" {
-  for_each = concat(
-    data.azuread_users.usr_adm_dbw.user_principal_names,
-    data.azuread_users.usr_usr_dbw.user_principal_names,
+  for_each = toset(
+    concat(
+      data.azuread_users.usr_adm_dbw.user_principal_names,
+      data.azuread_users.usr_usr_dbw.user_principal_names,
+    )
   )
 
   user_name  = each.key
@@ -26,7 +28,7 @@ resource "databricks_user" "users" {
 
 # adding admin to databricks admin group
 resource "databricks_group_member" "admin_grp" {
-  for_each  = data.azuread_users.usr_adm_dbw.object_ids
+  for_each  = toset(data.azuread_users.usr_adm_dbw.object_ids)
   group_id  = data.databricks_group.admins.id
   member_id = each.key
 }
