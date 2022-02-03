@@ -17,9 +17,9 @@ resource "azuread_group" "grp_adm" {
 }
 
 resource "azuread_group_member" "mem_adm" {
-  for_each         = data.azuread_users.usr_usr.user
+  for_each         = data.azuread_users.usr_usr.object_id
   group_object_id  = azuread_group.grp_adm.id
-  member_object_id = each.value.object_id
+  member_object_id = each.key
 }
 
 # users
@@ -29,9 +29,9 @@ resource "azuread_group" "grp_usr" {
 }
 
 resource "azuread_group_member" "mem_usr" {
-  for_each         = data.azuread_users.usr_usr.user
+  for_each         = data.azuread_users.usr_usr.object_id
   group_object_id  = azuread_group.grp_usr.id
-  member_object_id = each.value.object_id
+  member_object_id = each.key
 }
 
 
@@ -46,9 +46,9 @@ resource "azuread_group" "grp_adm_dbw" {
 }
 
 resource "azuread_group_member" "mem_adm_dbw" {
-  for_each         = data.azuread_users.usr_adm_dbw.user
+  for_each         = data.azuread_users.usr_adm_dbw.object_id
   group_object_id  = azuread_group.grp_adm_dbw.id
-  member_object_id = each.value.object_id
+  member_object_id = each.key
 }
 
 #users
@@ -58,9 +58,9 @@ resource "azuread_group" "grp_usr_dbw" {
 }
 
 resource "azuread_group_member" "mem_usr_dbw" {
-  for_each         = data.azuread_users.usr_usr_dbw.user
+  for_each         = data.azuread_users.usr_usr_dbw.object_id
   group_object_id  = azuread_group.grp_usr_dbw.id
-  member_object_id = each.value.object_id
+  member_object_id = each.key
 }
 
 # service principal for databricks

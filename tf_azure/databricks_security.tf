@@ -13,16 +13,20 @@ resource "databricks_secret" "secret" {
 }
 
 # adding users to databricks workspace
-resource "databricks_user" "admin_users" {
-  for_each   = data.azuread_user.usr_adm_dbw.user
-  user_name  = each.value.user_principal_name
+resource "databricks_user" "users" {
+  for_each = concat(
+    data.azuread_user.usr_adm_dbw.user_principal_name,
+    data.azuread_user.usr_usr_dbw.user_principal_name,
+  )
+
+  user_name  = each.key
   depends_on = [azurerm_databricks_workspace.dbw100]
   # depends_on as workspace comes from azurerm provider
 }
 
 # adding admin to databricks admin group
 resource "databricks_group_member" "admin_grp" {
-  for_each  = databricks_user.admin_users
+  for_each  = data.azuread_user.usr_adm_dbw.object_id
   group_id  = data.databricks_group.admins.id
-  member_id = each.value.id
+  member_id = each.key
 }
