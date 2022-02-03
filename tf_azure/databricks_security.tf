@@ -28,7 +28,7 @@ resource "databricks_user" "users" {
 
 # adding admin to databricks admin group
 resource "databricks_group_member" "admin_grp" {
-  for_each  = toset(data.azuread_users.usr_adm_dbw.object_ids)
+  count     = length(var.admin_dbw_email)
   group_id  = data.databricks_group.admins.id
-  member_id = each.key
+  member_id = data.azuread_users.usr_adm_dbw.object_ids[count.index]
 }
