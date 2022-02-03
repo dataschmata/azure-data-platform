@@ -1,4 +1,5 @@
 
+## high concurrency cluster
 # resource "databricks_cluster" "db_cluster_std" {
 #   depends_on              = [azurerm_databricks_workspace.dbw100]
 #   node_type_id            = data.databricks_node_type.dbc_smallest.id
@@ -25,7 +26,7 @@
 #   # }
 # }
 
-
+## single node cluster
 # resource "databricks_cluster" "db_cluster_sgl" {
 #   depends_on              = [azurerm_databricks_workspace.dbw100]
 #   node_type_id            = data.databricks_node_type.dbc_smallest.id

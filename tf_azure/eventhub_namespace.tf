@@ -14,7 +14,6 @@ resource "azurerm_eventhub_namespace" "ehn100" {
   }
 }
 
-
 resource "azurerm_eventhub_namespace_authorization_rule" "ehr100" {
   name                = var.workload
   namespace_name      = azurerm_eventhub_namespace.ehn100.name

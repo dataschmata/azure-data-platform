@@ -1,6 +1,7 @@
 ####################################
 # User
 ####################################
+
 variable "admin_email" {
   description = "email address list of admins of platform"
   type        = list(string)
@@ -11,10 +12,15 @@ variable "admin_dbw_email" {
   type        = list(string)
 }
 
-variable "openDoor" {
-  description = "Opens the door for databricks provider"
-  type        = string
+variable "user_dbw_email" {
+  description = "email address list of users of databricks"
+  type        = list(string)
 }
+
+
+####################################
+# Databricks
+####################################
 
 variable "dbw_sku" {
   description = "Databricks workspace SKU"
@@ -28,13 +34,15 @@ variable "dbw_max_workers" {
   default     = 2
 }
 
-variable "region" {
-  description = "Region in which to create the resources"
-  type        = map(string)
-  default = {
-    "short"    = "weu1"
-    "location" = "westeurope"
-  }
+
+####################################
+# Storage account
+####################################
+
+variable "sta_replication" {
+  description = "Defines type of replication for storage account."
+  type        = string
+  default     = "LRS"
 }
 
 variable "sta_containers" {
@@ -42,6 +50,11 @@ variable "sta_containers" {
   type        = list(string)
   default     = ["raw", "delta", "landing", "sandbox"]
 }
+
+
+####################################
+# Network
+####################################
 
 variable "vnt_space" {
   description = "the address space of the main vnet"
@@ -67,14 +80,9 @@ variable "pvt_prefix" {
   default     = ["10.0.32.0/20"]
 }
 
-variable "sta_replication" {
-  description = "Defines type of replication for storage account."
-  type        = string
-  default     = "LRS"
-}
 
 #####################################
-# info for tags
+# tags
 #####################################
 variable "workload" {
   type        = string
@@ -119,6 +127,15 @@ variable "addtl_tags" {
   type        = map(string)
 }
 
+variable "region" {
+  description = "Region in which to create the resources"
+  type        = map(string)
+  default = {
+    "short"    = "weu1"
+    "location" = "westeurope"
+  }
+}
+
 
 ## Cloud variables
 variable "cloud" {
@@ -142,4 +159,10 @@ variable "cloud" {
     portal                         = "https://portal.azure.com"
     resourceManager                = "https://management.azure.com/"
   }
+}
+
+######################
+variable "openDoor" {
+  description = "Opens the door for databricks provider"
+  type        = string
 }
