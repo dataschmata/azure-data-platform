@@ -9,6 +9,6 @@ resource "databricks_notebook" "notebook" {
     display(spark.range(10))
     EOT
   )
-  path     = "/config"
+  path     = "/config/main"
   language = "PYTHON"
 }

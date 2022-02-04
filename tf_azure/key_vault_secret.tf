@@ -1,6 +1,6 @@
 resource "time_sleep" "wait_creation" {
   depends_on      = [azurerm_role_assignment.role_kvt_sec]
-  create_duration = "180s"
+  create_duration = "300s"
 }
 
 resource "random_password" "aad_users" {
@@ -25,8 +25,14 @@ resource "azurerm_key_vault_secret" "kvt_sec_sp" {
 }
 
 resource "azurerm_key_vault_secret" "kvt_sec_usr" {
-  count        = length(local.aad_users)
-  name         = regex("[[:alnum:]]", "sec-${local.aad_users[count.index]}")
+  count = length(local.aad_users)
+
+  name = join("", [
+    "sec-",
+    regex("[[:alnum:]]*", local.aad_users[count.index])
+    ]
+  )
+
   value        = random_password.aad_users[count.index].result
   key_vault_id = azurerm_key_vault.kvt_main.id
   depends_on   = [time_sleep.wait_creation]

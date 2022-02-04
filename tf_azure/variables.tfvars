@@ -3,9 +3,9 @@
 ##################################
 
 admin_email     = ["admin@dataschmata.com"]
-admin_dbw_email = ["dbw_admin@dataschmata.com"]
-user_dbw_email  = ["dbw_user@dataschmata.com"]
-admin_kvt_email = ["kvt_admin@dataschmata.com"]
+admin_dbw_email = ["dbwadmin@dataschmata.com"]
+user_dbw_email  = ["dbwuser@dataschmata.com"]
+admin_kvt_email = ["kvtadmin@dataschmata.com"]
 
 
 ##################################
