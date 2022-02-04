@@ -1,16 +1,38 @@
-resource "time_sleep" "wait" {
-  depends_on = [azurerm_role_assignment.role_kvt_sec]
+resource "time_sleep" "wait_creation" {
+  depends_on      = [azurerm_role_assignment.role_kvt_sec]
+  create_duration = "180s"
+}
 
-  destroy_duration = "180s"
+resource "random_password" "aad_users" {
+  count       = length(local.aad_users)
+  length      = 30
+  upper       = true
+  lower       = true
+  number      = true
+  special     = true
+  min_lower   = 3
+  min_upper   = 3
+  min_numeric = 3
+  min_special = 3
 }
 
 resource "azurerm_key_vault_secret" "kvt_sec_sp" {
   name         = "sec-${azuread_service_principal.sp_dbw.display_name}"
   value        = azuread_service_principal_password.sp_dbw_sec.value
   key_vault_id = azurerm_key_vault.kvt_main.id
-  depends_on   = [time_sleep.wait]
+  depends_on   = [time_sleep.wait_creation]
   # await role assignment
 }
+
+resource "azurerm_key_vault_secret" "kvt_sec_usr" {
+  for_each     = random_password.aad_users
+  name         = regex("[[:alnum:]]", "sec-${each.key}")
+  value        = each.value.result
+  key_vault_id = azurerm_key_vault.kvt_main.id
+  depends_on   = [time_sleep.wait_creation]
+  # await role assignment
+}
+
 
 # resource "azurerm_key_vault_secret" "kvt_sec_adm" {
 #   name         = "sec-az-admin"
@@ -24,20 +46,3 @@ resource "azurerm_key_vault_secret" "kvt_sec_sp" {
 #   key_vault_id = azurerm_key_vault.kvt_main.id
 # }
 
-resource "random_password" "aad_users" {
-  for_each = toset(local.aad_users)
-
-  keepers = {
-    "aad_user" = "${each.key}"
-  }
-
-  length      = 30
-  upper       = true
-  lower       = true
-  number      = true
-  special     = true
-  min_lower   = 2
-  min_upper   = 2
-  min_numeric = 2
-  min_special = 2
-}
