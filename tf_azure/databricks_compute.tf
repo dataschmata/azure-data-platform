@@ -49,6 +49,8 @@ resource "databricks_cluster" "db_cluster_sgl" {
   spark_version    = data.databricks_spark_version.dbc_latest_lts.id
   cluster_name     = "Single Node"
   is_pinned        = true
+  
+  autotermination_minutes = 10
 
   spark_conf = {
     # Single-node
