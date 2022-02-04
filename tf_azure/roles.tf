@@ -37,7 +37,7 @@ resource "azurerm_role_assignment" "role_kvt_sec" {
 }
 
 resource "azurerm_role_assignment" "role_kvt_sec_sp" {
-  scope                = azurerm_key_vault.kvt_main.id
+  scope                = azurerm_resource_group.rsg_main.id
   role_definition_name = "Key Vault Secrets Officer"
   principal_id         = local.object_id
 
