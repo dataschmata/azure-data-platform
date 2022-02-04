@@ -4,7 +4,7 @@ resource "databricks_instance_pool" "dip_small" {
   max_capacity       = 5
   node_type_id       = data.databricks_node_type.dbc_smallest.id
   azure_attributes {
-    availability       = "SPOT_WITH_FALLBACK_AZURE"
+    availability       = "SPOT_AZURE"
     spot_bid_max_price = -1
   }
   idle_instance_autotermination_minutes = 0
@@ -44,11 +44,11 @@ resource "databricks_instance_pool" "dip_small" {
 
 ## single node cluster
 resource "databricks_cluster" "db_cluster_sgl" {
-  depends_on              = [azurerm_databricks_workspace.dbw100]
-  instance_pool_id        = databricks_instance_pool.dip_small.id
-  spark_version           = data.databricks_spark_version.dbc_latest_lts.id
-  cluster_name            = "Single Node"
-  is_pinned               = true
+  depends_on       = [azurerm_databricks_workspace.dbw100]
+  instance_pool_id = databricks_instance_pool.dip_small.id
+  spark_version    = data.databricks_spark_version.dbc_latest_lts.id
+  cluster_name     = "Single Node"
+  is_pinned        = true
 
   spark_conf = {
     # Single-node
