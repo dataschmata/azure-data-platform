@@ -11,11 +11,13 @@ resource "azurerm_key_vault" "kvt_main" {
   sku_name                    = "standard"
 
   network_acls {
-    default_action = "Deny"
+    # Set to Allow due to runner ip change
+    default_action = "Allow"
     ip_rules       = [chomp(data.http.myip.body)]
     bypass         = "AzureServices"
-    virtual_network_subnet_ids = [
-      azurerm_subnet.snt_main.id,
-    ]
+    # de-activating due to runner ip change
+    # virtual_network_subnet_ids = [
+    #   azurerm_subnet.snt_main.id,
+    # ]
   }
 }
