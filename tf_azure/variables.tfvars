@@ -5,6 +5,7 @@
 admin_email     = ["admin@dataschmata.com"]
 admin_dbw_email = ["dbw_admin@dataschmata.com"]
 user_dbw_email  = ["dbw_user@dataschmata.com"]
+admin_dbw_email = ["kvt_admin@dataschmata.com"]
 
 
 ##################################

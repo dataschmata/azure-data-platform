@@ -40,7 +40,7 @@ resource "azuread_group" "grp_adm_kvt" {
   security_enabled = true
 }
 
-resource "azuread_group_member" "mem_adm_dbw" {
+resource "azuread_group_member" "mem_adm_kvt" {
   count            = length(var.admin_kvt_email)
   group_object_id  = azuread_group.grp_adm_kvt.id
   member_object_id = data.azuread_users.usr_adm_kvt.object_ids[count.index]

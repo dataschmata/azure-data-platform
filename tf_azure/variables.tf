@@ -5,16 +5,25 @@
 variable "admin_email" {
   description = "email address list of admins of platform"
   type        = list(string)
+  default     = []
+}
+
+variable "admin_kvt_email" {
+  description = "email address list of admins of key vault"
+  type        = list(string)
+  default     = []
 }
 
 variable "admin_dbw_email" {
   description = "email address list of admins of databricks"
   type        = list(string)
+  default     = []
 }
 
 variable "user_dbw_email" {
   description = "email address list of users of databricks"
   type        = list(string)
+  default     = []
 }
 
 
