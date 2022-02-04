@@ -24,7 +24,7 @@ resource "azurerm_key_vault_secret" "kvt_sec_sp" {
 #   key_vault_id = azurerm_key_vault.kvt_main.id
 # }
 
-resource "random_password" "password" {
+resource "random_password" "aad_users" {
   for_each = toset(local.aad_users)
 
   keepers = {

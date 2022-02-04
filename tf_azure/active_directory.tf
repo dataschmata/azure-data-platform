@@ -1,8 +1,8 @@
 # Create all users in the AAD
 resource "azuread_user" "aad_usr" {
-  for_each            = toset(local.aad_users)
+  for_each            = random_password.aad_users.keepers.aad_user
   display_name        = each.key
-  password            = "This1sA8adPa$$w0rd1!"
+  password            = each.value.result
   user_principal_name = each.key
 }
 
