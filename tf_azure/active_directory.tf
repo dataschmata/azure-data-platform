@@ -34,6 +34,17 @@ resource "azuread_group_member" "mem_adm" {
 #   member_object_id = data.azuread_users.usr_usr.object_ids[count.index]
 # }
 
+# key vault admin
+resource "azuread_group" "grp_adm_kvt" {
+  display_name     = "az-${local.workload}-admin-kvt"
+  security_enabled = true
+}
+
+resource "azuread_group_member" "mem_adm_dbw" {
+  count            = length(var.admin_kvt_email)
+  group_object_id  = azuread_group.grp_adm_kvt.id
+  member_object_id = data.azuread_users.usr_adm_kvt.object_ids[count.index]
+}
 
 ##########################
 # databricks namespace
@@ -51,7 +62,7 @@ resource "azuread_group_member" "mem_adm_dbw" {
   member_object_id = data.azuread_users.usr_adm_dbw.object_ids[count.index]
 }
 
-#users
+#users databricks
 resource "azuread_group" "grp_usr_dbw" {
   display_name     = "az-${local.workload}-user-dbw"
   security_enabled = true
