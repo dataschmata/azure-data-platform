@@ -36,6 +36,7 @@ locals {
   aad_users = concat(
     var.admin_email,
     var.admin_dbw_email,
+    var.admin_kvt_email,
     var.user_dbw_email
   )
 
