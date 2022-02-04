@@ -36,6 +36,7 @@ locals {
   aad_users = concat(
     var.admin_email,
     var.admin_dbw_email,
+    var.admin_kvt_email,
     var.user_dbw_email
   )
 
@@ -43,6 +44,17 @@ locals {
   dbw_users = concat(
     var.admin_dbw_email,
     var.user_dbw_email,
+    [azuread_service_principal.sp_dbw.object_id]
+  )
+
+  # concat list of admins for kvt
+  kvt_admin = concat(
+    var.admin_kvt_email,
+    var.admin_email,
+    [
+      data.azurerm_client_config.cfg.object_id,
+      azuread_service_principal.sp_dbw.object_id
+    ]
   )
 
   tags = merge(
