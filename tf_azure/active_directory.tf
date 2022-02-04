@@ -1,9 +1,9 @@
 # Create all users in the AAD with random password
 resource "azuread_user" "aad_usr" {
-  for_each            = random_password.aad_users
-  display_name        = each.key
-  password            = each.value.result
-  user_principal_name = each.key
+  count               = length(local.aad_users)
+  display_name        = local.aad_users[count.index]
+  password            = random_password.aad_users[count.index].result
+  user_principal_name = local.aad_users[count.index]
 }
 
 ##########################

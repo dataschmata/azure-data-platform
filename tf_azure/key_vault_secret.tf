@@ -25,14 +25,13 @@ resource "azurerm_key_vault_secret" "kvt_sec_sp" {
 }
 
 resource "azurerm_key_vault_secret" "kvt_sec_usr" {
-  for_each     = random_password.aad_users
-  name         = regex("[[:alnum:]]", "sec-${each.key}")
-  value        = each.value.result
+  count        = length(local.aad_users)
+  name         = regex("[[:alnum:]]", "sec-${local.aad_users[count.index]}")
+  value        = random_password.aad_users[count.index].result
   key_vault_id = azurerm_key_vault.kvt_main.id
   depends_on   = [time_sleep.wait_creation]
   # await role assignment
 }
-
 
 # resource "azurerm_key_vault_secret" "kvt_sec_adm" {
 #   name         = "sec-az-admin"
