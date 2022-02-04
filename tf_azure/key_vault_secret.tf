@@ -29,7 +29,7 @@ resource "azurerm_key_vault_secret" "kvt_sec_usr" {
 
   name = join("", [
     "sec-",
-    regex("[[:alnum:]]*.[[:alnum:]]*", local.aad_users[count.index])
+    regex("[[:alnum:]]*", local.aad_users[count.index])
     ]
   )
 
