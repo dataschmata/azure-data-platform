@@ -81,6 +81,22 @@ locals {
   tf_secret_scope = azuread_service_principal.sp_dbw.display_name
   tf_secret       = "${local.tf_secret_scope}_secret"
 
+  dbw_default_policy = {
+    "dbus_per_hour" : {
+      "type" : "range",
+      "maxValue" : 10
+    },
+    "autotermination_minutes" : {
+      "type" : "fixed",
+      "value" : 10,
+      "hidden" : true
+    },
+    "custom_tags.Team" : {
+      "type" : "fixed",
+      "value" : var.workload
+    }
+  }
+
   # -------------------------------------------------------------------
   # -------------------------------------------------------------------
 }
