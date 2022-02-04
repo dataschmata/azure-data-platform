@@ -26,9 +26,10 @@ resource "azurerm_key_vault_secret" "kvt_sec_sp" {
 
 resource "azurerm_key_vault_secret" "kvt_sec_usr" {
   count = length(local.aad_users)
-  name  = join("", [
+
+  name = join("", [
     "sec-",
-    regex("[[:alnum:]].*[[:alnum:]]*", local.aad_users[count.index])
+    regex("[[:alnum:]]*.[[:alnum:]]*", local.aad_users[count.index])
     ]
   )
 
