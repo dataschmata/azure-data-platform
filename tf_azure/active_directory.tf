@@ -41,7 +41,7 @@ resource "azuread_group" "grp_adm_kvt" {
 }
 
 resource "azuread_group_member" "mem_adm_kvt" {
-  count            = length(var.admin_kvt_email)
+  count            = length(local.kvt_admin)
   group_object_id  = azuread_group.grp_adm_kvt.id
   member_object_id = data.azuread_users.usr_adm_kvt.object_ids[count.index]
 }
@@ -69,7 +69,7 @@ resource "azuread_group" "grp_usr_dbw" {
 }
 
 resource "azuread_group_member" "mem_usr_dbw" {
-  count            = length(var.user_dbw_email)
+  count            = length(local.dbw_users)
   group_object_id  = azuread_group.grp_usr_dbw.id
   member_object_id = data.azuread_users.usr_usr_dbw.object_ids[count.index]
 }

@@ -1,6 +1,6 @@
 resource "time_sleep" "wait_creation" {
-  depends_on      = [azurerm_role_assignment.role_kvt_sec]
-  create_duration = "300s"
+  depends_on      = [azurerm_role_assignment.role_kvt_sec, azurerm_role_assignment.role_kvt_sec]
+  create_duration = "180s"
 }
 
 resource "random_password" "aad_users" {
