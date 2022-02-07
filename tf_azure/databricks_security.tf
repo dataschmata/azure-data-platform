@@ -18,9 +18,9 @@ resource "databricks_secret" "secret" {
 resource "databricks_user" "users" {
   for_each = toset(
     concat(
-      data.azuread_users.usr_adm_dbw.user_principal_names,
-      data.azuread_users.usr_usr_dbw.user_principal_names,
-      azuread_service_principal.sp_dbw.object_id,
+      [data.azuread_users.usr_adm_dbw.user_principal_names],
+      [data.azuread_users.usr_usr_dbw.user_principal_names],
+      [azuread_service_principal.sp_dbw.object_id],
     )
   )
   user_name = each.key
