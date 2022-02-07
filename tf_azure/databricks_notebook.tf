@@ -1,6 +1,8 @@
 resource "databricks_directory" "my_custom_directory" {
   path             = "/config"
   delete_recursive = true
+  depends_on       = [azurerm_databricks_workspace.dbw100]
+  # depends_on as workspace comes from azurerm provider
 }
 
 resource "databricks_notebook" "notebook" {
@@ -11,4 +13,7 @@ resource "databricks_notebook" "notebook" {
   )
   path     = "/config/main"
   language = "PYTHON"
+
+  depends_on = [azurerm_databricks_workspace.dbw100]
+  # depends_on as workspace comes from azurerm provider
 }
