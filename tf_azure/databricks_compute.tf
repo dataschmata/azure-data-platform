@@ -44,7 +44,6 @@ resource "databricks_instance_pool" "dip_small" {
 
 ## single node cluster
 resource "databricks_cluster" "db_cluster_sgl" {
-  depends_on       = [azurerm_databricks_workspace.dbw100]
   instance_pool_id = databricks_instance_pool.dip_small.id
   spark_version    = data.databricks_spark_version.dbc_latest_lts.id
   cluster_name     = "Single Node"
