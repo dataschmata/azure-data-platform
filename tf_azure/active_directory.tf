@@ -6,6 +6,28 @@ resource "azuread_user" "aad_usr" {
   user_principal_name = local.aad_users[count.index]
 }
 
+# creation service principal for databricks specifically
+resource "azuread_application" "app_dbw" {
+  display_name     = "sp-${local.workload}-databricks"
+  sign_in_audience = "AzureADMyOrg"
+  feature_tags {
+    hide = true
+  }
+}
+
+resource "azuread_service_principal" "sp_dbw" {
+  application_id = azuread_application.app_dbw.application_id
+  feature_tags {
+    hide = true
+  }
+}
+
+resource "azuread_service_principal_password" "sp_dbw_sec" {
+  service_principal_id = azuread_service_principal.sp_dbw.object_id
+  display_name         = "${local.workload}-terraform"
+}
+
+
 ##########################
 # workload level
 ##########################
@@ -41,10 +63,16 @@ resource "azuread_group" "grp_adm_kvt" {
 }
 
 resource "azuread_group_member" "mem_adm_kvt" {
-  count            = length(local.kvt_admin)
+  count            = length(var.admin_kvt_email)
   group_object_id  = azuread_group.grp_adm_kvt.id
   member_object_id = data.azuread_users.usr_adm_kvt.object_ids[count.index]
 }
+
+resource "azuread_group_member" "mem_adm_kvtsp" {
+  group_object_id  = azuread_group.grp_adm_kvt.id
+  member_object_id = local.object_id
+}
+
 
 ##########################
 # databricks namespace
@@ -62,6 +90,11 @@ resource "azuread_group_member" "mem_adm_dbw" {
   member_object_id = data.azuread_users.usr_adm_dbw.object_ids[count.index]
 }
 
+resource "azuread_group_member" "mem_adm_dbwsp" {
+  group_object_id  = azuread_group.grp_adm_dbw.id
+  member_object_id = azuread_service_principal.sp_dbw.object_id
+}
+
 #users databricks
 resource "azuread_group" "grp_usr_dbw" {
   display_name     = "az-${local.workload}-user-dbw"
@@ -72,30 +105,4 @@ resource "azuread_group_member" "mem_usr_dbw" {
   count            = length(local.dbw_users)
   group_object_id  = azuread_group.grp_usr_dbw.id
   member_object_id = data.azuread_users.usr_usr_dbw.object_ids[count.index]
-}
-
-# service principal for databricks
-resource "azuread_application" "app_dbw" {
-  display_name     = "sp-${local.workload}-databricks"
-  sign_in_audience = "AzureADMyOrg"
-  feature_tags {
-    hide = true
-  }
-}
-
-resource "azuread_group_member" "mem_adm_dbwsp" {
-  group_object_id  = azuread_group.grp_adm_dbw.id
-  member_object_id = azuread_service_principal.sp_dbw.object_id
-}
-
-resource "azuread_service_principal" "sp_dbw" {
-  application_id = azuread_application.app_dbw.application_id
-  feature_tags {
-    hide = true
-  }
-}
-
-resource "azuread_service_principal_password" "sp_dbw_sec" {
-  service_principal_id = azuread_service_principal.sp_dbw.object_id
-  display_name         = "${local.workload}-terraform"
 }

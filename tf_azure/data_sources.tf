@@ -32,7 +32,7 @@ data "databricks_spark_version" "dbc_latest_lts" {
 
 # get the users for each group membership 
 data "azuread_users" "usr_usr_dbw" {
-  user_principal_names = var.user_dbw_email
+  user_principal_names = local.dbw_users
   depends_on           = [azuread_user.aad_usr]
 }
 
@@ -42,7 +42,7 @@ data "azuread_users" "usr_adm_dbw" {
 }
 
 data "azuread_users" "usr_adm_kvt" {
-  user_principal_names = var.admin_kvt_email
+  user_principal_names = local.kvt_admin
   depends_on           = [azuread_user.aad_usr]
 }
 
