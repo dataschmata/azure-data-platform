@@ -2,7 +2,7 @@
 resource "databricks_secret_scope" "secret_scope" {
   name                     = local.tf_secret_scope
   initial_manage_principal = "users"
-  depends_on               = [
+  depends_on = [
     azurerm_databricks_workspace.dbw100
   ]
   # depends_on as workspace comes from azurerm provider
@@ -23,8 +23,8 @@ resource "databricks_user" "users" {
       azuread_service_principal.sp_dbw.object_id,
     )
   )
+  user_name = each.key
 
-  user_name  = each.key
   depends_on = [
     azurerm_databricks_workspace.dbw100
   ]
@@ -37,22 +37,25 @@ resource "databricks_group" "admin_grp" {
   display_name               = "${local.workload}-admin"
   allow_cluster_create       = true
   allow_instance_pool_create = true
+  databricks_sql_access      = true
+  workspace_access           = true
+
 }
 
-resource "databricks_group_member" "adm_grp_mem" {
-  for_each = toset(
-    concat(
-      data.azuread_users.usr_adm_dbw.user_principal_names,
-      azuread_service_principal.sp_dbw.object_id,
-    )
-  )
-  
-  group_id  = databricks_group.admin_grp.id
-  member_id = data.azuread_users.usr_adm_dbw.object_ids[count.index]
-}
+# resource "databricks_group_member" "adm_grp_mem" {
+#   for_each = toset(
+#     concat(
+#       data.azuread_users.usr_adm_dbw.user_principal_names,
+#       azuread_service_principal.sp_dbw.object_id,
+#     )
+#   )
+
+#   group_id  = databricks_group.admin_grp.id
+#   member_id = data.azuread_users.usr_adm_dbw.object_ids[count.index]
+# }
 
 resource "databricks_group" "usr_grp" {
-  display_name               = "${local.workload}-user"
+  display_name = "${local.workload}-user"
 }
 
 resource "databricks_group_member" "usr_grp_mem" {
