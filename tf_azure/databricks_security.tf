@@ -39,7 +39,7 @@ resource "databricks_group" "admin_grp" {
   allow_instance_pool_create = true
 }
 
-resource "databricks_group_member" "admin_grp" {
+resource "databricks_group_member" "adm_grp_mem" {
   for_each = toset(
     concat(
       data.azuread_users.usr_adm_dbw.user_principal_names,
@@ -49,4 +49,42 @@ resource "databricks_group_member" "admin_grp" {
   
   group_id  = databricks_group.admin_grp.id
   member_id = data.azuread_users.usr_adm_dbw.object_ids[count.index]
+}
+
+resource "databricks_group" "usr_grp" {
+  display_name               = "${local.workload}-user"
+}
+
+resource "databricks_group_member" "usr_grp_mem" {
+  for_each  = databricks_user.users
+  group_id  = databricks_group.usr_grp.id
+  member_id = each.value.id
+}
+
+resource "databricks_permissions" "cls_use_sgl" {
+  cluster_id = databricks_cluster.db_cluster_sgl.cluster_id
+
+  access_control {
+    group_name       = databricks_group.usr_grp.display_name
+    permission_level = "CAN_ATTACH_TO"
+  }
+
+  access_control {
+    group_name       = databricks_group.admin_grp.display_name
+    permission_level = "CAN_MANAGE"
+  }
+}
+
+resource "databricks_permissions" "int_use_sgl" {
+  instance_pool_id = databricks_instance_pool.dip_small.id
+
+  access_control {
+    group_name       = databricks_group.usr_grp.display_name
+    permission_level = "CAN_ATTACH_TO"
+  }
+
+  access_control {
+    group_name       = databricks_group.admin_grp.display_name
+    permission_level = "CAN_MANAGE"
+  }
 }
