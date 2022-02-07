@@ -1,6 +1,8 @@
 resource "time_sleep" "wait_creation" {
-  depends_on      = [azurerm_role_assignment.role_kvt_sec, azurerm_role_assignment.role_kvt_sec]
-  create_duration = "180s"
+  create_duration = "120s"
+  depends_on = [
+    azurerm_role_assignment.role_kvt_sec
+  ]
 }
 
 resource "random_password" "aad_users" {
@@ -20,7 +22,9 @@ resource "azurerm_key_vault_secret" "kvt_sec_sp" {
   name         = "sec-${azuread_service_principal.sp_dbw.display_name}"
   value        = azuread_service_principal_password.sp_dbw_sec.value
   key_vault_id = azurerm_key_vault.kvt_main.id
-  depends_on   = [time_sleep.wait_creation]
+  depends_on = [
+    time_sleep.wait_creation
+  ]
   # await role assignment
 }
 
@@ -30,24 +34,14 @@ resource "azurerm_key_vault_secret" "kvt_sec_usr" {
   name = join("", [
     "sec-",
     regex("[[:alnum:]]*", local.aad_users[count.index])
+    # expects only alpha numeric before @ sign, needs change 
     ]
   )
 
   value        = random_password.aad_users[count.index].result
   key_vault_id = azurerm_key_vault.kvt_main.id
-  depends_on   = [time_sleep.wait_creation]
+  depends_on = [
+    time_sleep.wait_creation
+  ]
   # await role assignment
 }
-
-# resource "azurerm_key_vault_secret" "kvt_sec_adm" {
-#   name         = "sec-az-admin"
-#   value        = random_password.password.result
-#   key_vault_id = azurerm_key_vault.kvt_main.id
-# }
-
-# resource "azurerm_key_vault_secret" "kvt_sec_adm_dbw" {
-#   name         = "sec-az-admin-dbw"
-#   value        = random_password.password.result
-#   key_vault_id = azurerm_key_vault.kvt_main.id
-# }
-
