@@ -24,3 +24,10 @@ resource "azurerm_databricks_workspace" "dbw100" {
     public_subnet_network_security_group_association_id  = azurerm_subnet_network_security_group_association.nga_pub.id
   }
 }
+
+resource "time_sleep" "dbw_wait" {
+  create_duration = "30s"
+  depends_on = [
+    azurerm_databricks_workspace.dbw100
+  ]
+}
