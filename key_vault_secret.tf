@@ -1,5 +1,5 @@
-resource "time_sleep" "wait_creation" {
-  create_duration = "120s"
+resource "time_sleep" "sct_wait" {
+  create_duration = "90s"
   depends_on = [
     azurerm_role_assignment.role_kvt_sec
   ]
@@ -23,7 +23,7 @@ resource "azurerm_key_vault_secret" "kvt_sec_sp" {
   value        = azuread_service_principal_password.sp_dbw_sec.value
   key_vault_id = azurerm_key_vault.kvt_main.id
   depends_on = [
-    time_sleep.wait_creation
+    time_sleep.sct_wait
   ]
   # await role assignment
 }
@@ -41,7 +41,7 @@ resource "azurerm_key_vault_secret" "kvt_sec_usr" {
   value        = random_password.aad_users[count.index].result
   key_vault_id = azurerm_key_vault.kvt_main.id
   depends_on = [
-    time_sleep.wait_creation
+    time_sleep.sct_wait
   ]
   # await role assignment
 }

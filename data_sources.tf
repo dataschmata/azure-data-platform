@@ -22,7 +22,7 @@ data "azuread_client_config" "ad_current" {}
 data "databricks_node_type" "dbc_smallest" {
   local_disk = true
   depends_on = [
-    azurerm_databricks_workspace.dbw100
+    time_sleep.dbw_wait
   ]
   # depends_on as workspace comes from azurerm provider
 }
@@ -31,7 +31,7 @@ data "databricks_node_type" "dbc_smallest" {
 data "databricks_spark_version" "dbc_latest_lts" {
   long_term_support = true
   depends_on = [
-    azurerm_databricks_workspace.dbw100
+    time_sleep.dbw_wait
   ]
   # depends_on as workspace comes from azurerm provider
 }

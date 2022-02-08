@@ -3,9 +3,9 @@ resource "databricks_secret_scope" "secret_scope" {
   name                     = local.tf_secret_scope
   initial_manage_principal = "users"
   depends_on = [
-    azurerm_databricks_workspace.dbw100
+    time_sleep.dbw_wait
   ]
-  # depends_on as workspace comes from azurerm provider
+  # depends_on as workspace comes from azurerm provider, wait to ensure running fully
 }
 
 resource "databricks_secret" "secret" {
@@ -25,7 +25,7 @@ resource "databricks_user" "users" {
   user_name = each.key
 
   depends_on = [
-    azurerm_databricks_workspace.dbw100
+    time_sleep.dbw_wait
   ]
   # depends_on as workspace comes from azurerm provider
 }
