@@ -35,3 +35,14 @@ resource "azurerm_role_assignment" "role_kvt_sec" {
   role_definition_name = "Key Vault Secrets Officer"
   principal_id         = azuread_group.grp_adm_kvt.object_id
 }
+
+
+#########################
+# Terraform SP
+#########################
+
+resource "azurerm_role_assignment" "role_trf_sp" {
+  scope                = azurerm_resource_group.rsg_main.id
+  role_definition_name = "Key Vault Administrator"
+  principal_id         = local.object_id
+}
