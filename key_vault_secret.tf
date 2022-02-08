@@ -1,5 +1,5 @@
 resource "time_sleep" "sct_wait" {
-  create_duration = "60s"
+  create_duration = "45s"
   depends_on = [
     azurerm_role_assignment.role_kvt_sec
   ]
