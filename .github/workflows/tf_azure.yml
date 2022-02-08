@@ -19,11 +19,12 @@ jobs:
       TF_VAR_openDoor: ${{ secrets.ARM_CLIENT_SECRET }}
     runs-on: ubuntu-latest
  
-    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    # Use the Bash shell regardless whether the GitHub Actions runner
+    # is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
         shell: bash
-        working-directory: "./tf_azure"
+        working-directory: "./"
 
     steps:
     # Checkout the repository to the GitHub Actions runner

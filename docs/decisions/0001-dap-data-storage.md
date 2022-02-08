@@ -1,7 +1,8 @@
-# Data Aggregation Platform (DAP)
+# 0001: Data storage options for Data Aggregation Platform (DAP)
 
 * Status: proposed <!-- optional ...  superseded by [ADR-0005](0005-example.md)]-->
-* Deciders: Dennis Rossberg <!-- optional -->
+* Author: Dennis ROSSBERG <!-- optional -->
+* Deciders: Igor FONKOU-TAGUE, Tudor STEFANESCU, Emilien CHARTON <!-- optional -->
 * Date: 1st February 2022 <!-- optional -->
 
 Technical Story: [description | ticket/issue URL] <!-- optional -->
@@ -9,13 +10,15 @@ Technical Story: [description | ticket/issue URL] <!-- optional -->
 
 ## Context and Problem Statement
 
-[Describe the context and problem statement, e.g., in free form using two to three sentences. You may want to articulate the problem in form of a question.]
+System Applications like Space Inspire (Novacom 2 project) have data storage, aggregation and/or processing requiremnts from an operational point of view and recently more and more also from an analytical workload and advanced modeling consideration...
 
 
 ## Decision Drivers <!-- optional -->
 
-* [driver 1, e.g., a force, facing concern, …]
-* [driver 2, e.g., a force, facing concern, …]
+* Scalable
+* Fault-tolerant
+* Somewhat future proof
+* ...
 * … <!-- numbers of drivers can vary -->
 
 
@@ -57,16 +60,6 @@ Chosen option: "[option 1]", because [justification. e.g., only option, which me
 
 
 ### [option 2]
-
-[example | description | pointer to more information | …] <!-- optional -->
-
-* Good, because [argument a]
-* Good, because [argument b]
-* Bad, because [argument c]
-* … <!-- numbers of pros and cons can vary -->
-
-
-### [option 3]
 
 [example | description | pointer to more information | …] <!-- optional -->
 
