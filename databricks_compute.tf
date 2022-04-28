@@ -1,7 +1,7 @@
 resource "databricks_instance_pool" "dip_small" {
   instance_pool_name = "Smallest Nodes Spot"
   min_idle_instances = 0
-  max_capacity       = 5
+  max_capacity       = 3
   node_type_id       = data.databricks_node_type.dbc_smallest.id
   azure_attributes {
     availability       = "SPOT_AZURE"
